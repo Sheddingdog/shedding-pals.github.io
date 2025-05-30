@@ -49,7 +49,6 @@
     </p>
     <!-- Hidden inputs -->
     <input type="hidden" name="form-name" value="contact">
-    <input type="hidden" name="_next" value="/thank-you.html">
     <p>
       <label for="name">Name <span class="required">*</span>: <input type="text" id="name" name="name" required></label>
     </p>
@@ -88,16 +87,18 @@
       submitButton.textContent = 'Sending...';
 
       try {
-        const response = await fetch('/', {
+        const response = await fetch('/.netlify/functions/submit-form', {
           method: 'POST',
           body: new FormData(e.target),
         });
+        console.log('Response status:', response.status, 'OK:', response.ok);
         if (response.ok) {
           window.location.href = '/thank-you.html';
         } else {
-          throw new Error('Submission failed');
+          throw new Error(`Submission failed with status ${response.status}`);
         }
       } catch (error) {
+        console.error('Form submission error:', error);
         alert('Error submitting form. Please try again.');
         submitButton.disabled = false;
         submitButton.textContent = 'Send';
