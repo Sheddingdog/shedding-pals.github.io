@@ -8,6 +8,30 @@
 <body>
   <h1>Welcome to My Website</h1>
   <p>Open to everyone!</p>
+  
+  <!-- Contact Form -->
+  <h2>Contact Us</h2>
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <!-- Hidden honeypot field to prevent spam -->
+    <p style="display: none;">
+      <label>Don’t fill this out: <input name="bot-field"></label>
+    </p>
+    <!-- Hidden input for email notifications -->
+    <input type="hidden" name="form-name" value="contact">
+    <p>
+      <label for="name">Name: <input type="text" id="name" name="name" required></label>
+    </p>
+    <p>
+      <label for="email">Email: <input type="email" id="email" name="email" required></label>
+    </p>
+    <p>
+      <label for="message">Message: <textarea id="message" name="message" required></textarea></label>
+    </p>
+    <p>
+      <button type="submit">Send</button>
+    </p>
+  </form>
+
   <p id="last-updated">Last updated: <span id="date"></span></p>
 
   <script>
