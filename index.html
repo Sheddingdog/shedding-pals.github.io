@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
-</head>
-<body>
-  <h1>Welcome to My Website</h1>
-  <p>Open to everyone!</p>
-  
-<!-- Contact Form -->
-<h2>Send us a message!</h2>
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
-  <!-- Hidden honeypot field to prevent spam -->
-  <p style="display: none;">
-    <label>Don’t fill this out: <input name="bot-field"></label>
-  </p>
-  <!-- Hidden input for email notifications -->
-  <input type="hidden" name="form-name" value="contact">
-  <p>
-    <label for="name">Name: <input type="text" id="name" name="name" required></label>
-  </p>
-  <p>
-    <label for="email">Email: <input type="email" id="email" name="email" required></label>
-  </p>
-  <p>
-    <label for="phone">Phone: <input type="tel" id="phone" name="phone"></label>
-  </p>
-  <p>
-    <label for="message">Message: <textarea id="message" name="message" required></textarea></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
-</form>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>My Website</title>
+   </head>
+   <body>
+     <h1>Welcome to My Website</h1>
+     <p>Open to everyone!</p>
+     
+     <!-- Contact Form -->
+     <h2>Send us a message!</h2>
+     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+       <!-- Hidden honeypot field to prevent spam -->
+       <p style="display: none;">
+         <label>Don’t fill this out: <input name="bot-field"></label>
+       </p>
+       <!-- Hidden input for email notifications -->
+       <input type="hidden" name="form-name" value="contact">
+       <p>
+         <label for="name">Name: <input type="text" id="name" name="name" required></label>
+       </p>
+       <p>
+         <label for="email">Email: <input type="email" id="email" name="email" required></label>
+       </p>
+       <p>
+         <label for="phone">Phone: <input type="tel" id="phone" name="phone"></label>
+       </p>
+       <p>
+         <label for="message">Message: <textarea id="message" name="message" required></textarea></label>
+       </p>
+       <p>
+         <button type="submit">Send</button>
+       </p>
+     </form>
 
-  <p id="last-updated">Last updated: <span id="date"></span></p>
+     <p id="last-updated">Last updated: <span id="date"></span></p>
 
-  <script>
-    const lastModified = new Date(document.lastModified);
-    const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    const formattedDate = lastModified.toLocaleString('en-US', options);
-    document.getElementById('date').textContent = formattedDate;
-  </script>
-</body>
-</html>
+     <script>
+       const lastModified = new Date(document.lastModified);
+       const options = {
+         year: 'numeric',
+         month: 'long',
+         day: 'numeric'
+       };
+       const formattedDate = lastModified.toLocaleString('en-US', options);
+       document.getElementById('date').textContent = formattedDate;
+     </script>
+   </body>
+   </html>
