@@ -8,17 +8,17 @@
 <body>
   <h1>Welcome to My Website</h1>
   <p>Open to everyone!</p>
-</body>
-</html>
-<p id="last-updated">Last updated: <span id="date"></span></p>
+  <p id="last-updated">Last updated: <span id="date"></span></p>
 
-<script>
+  <script>
     const lastModified = new Date(document.lastModified);
     const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     };
     const formattedDate = lastModified.toLocaleString('en-US', options);
     document.getElementById('date').textContent = formattedDate;
-</script>
+  </script>
+</body>
+</html>
