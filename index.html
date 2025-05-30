@@ -10,4 +10,15 @@
   <p>Open to everyone!</p>
 </body>
 </html>
-<p>Updated at 07:55 PM CEST, May 30, 2025!</p>
+<p id="last-updated">Last updated: <span id="date"></span></p>
+
+<script>
+    const lastModified = new Date(document.lastModified);
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
+    const formattedDate = lastModified.toLocaleString('en-US', options);
+    document.getElementById('date').textContent = formattedDate;
+</script>
