@@ -21,6 +21,13 @@
     .form-group {
       margin-bottom: 15px;
     }
+    .name-group {
+      display: flex;
+      gap: 20px;
+    }
+    .name-group > div {
+      flex: 1;
+    }
     label {
       display: block;
       margin-bottom: 5px;
@@ -38,6 +45,14 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid #28a745;
+      outline-offset: 2px;
+    }
+    input:hover, textarea:hover, select:hover {
+      border-color: #28a745;
+      box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+    }
     button {
       background-color: #28a745;
       color: white;
@@ -47,8 +62,19 @@
       cursor: pointer;
       font-size: 16px;
     }
-    button:hover {
+    button:hover:not(:disabled) {
       background-color: #218838;
+    }
+    button:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+    #clearForm {
+      background-color: #dc3545;
+      margin-left: 10px;
+    }
+    #clearForm:hover {
+      background-color: #c82333;
     }
     .home-link {
       display: block;
@@ -143,42 +169,53 @@
       border-top: 1px solid #ccc;
       margin: 5px 0;
     }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Contact Us</h2>
-    <p class="form-note"><span class="asterisk">*</span> Required field</p>
+    <p class="form-note" id="required-note"><span class="asterisk" aria-hidden="true">*</span> Required field</p>
     <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
       <input type="hidden" name="form-name" value="contact">
       
-      <div class="form-group">
-        <label for="firstName" class="mandatory">First Name</label>
-        <input type="text" id="firstName" name="firstName" required pattern="[A-Za-z]{2,}" title="Please enter a valid first name (letters only, at least 2 characters)">
-        <span class="error" id="firstNameError">Please enter a valid first name.</span>
-      </div>
-      
-      <div class="form-group">
-        <label for="lastName" class="mandatory">Last Name</label>
-        <input type="text" id="lastName" name="lastName" required pattern="[A-Za-z]{2,}" title="Please enter a valid last name (letters only, at least 2 characters)">
-        <span class="error" id="lastNameError">Please enter a valid last name.</span>
+      <div class="form-group name-group">
+        <div>
+          <label for="firstName" class="mandatory">First Name</label>
+          <input type="text" id="firstName" name="firstName" required pattern="[A-Za-z]{2,}" title="Please enter a valid first name (letters only, at least 2 characters)" aria-required="true" aria-describedby="firstNameError required-note" placeholder="e.g., Anna">
+          <span class="error" id="firstNameError" aria-live="polite">Please enter a valid first name.</span>
+        </div>
+        <div>
+          <label for="lastName" class="mandatory">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required pattern="[A-Za-z]{2,}" title="Please enter a valid last name (letters only, at least 2 characters)" aria-required="true" aria-describedby="lastNameError required-note" placeholder="e.g., Eriksson">
+          <span class="error" id="lastNameError" aria-live="polite">Please enter a valid last name.</span>
+        </div>
       </div>
       
       <div class="form-group">
         <label for="phone" class="mandatory">Phone</label>
-        <input type="tel" id="phone" name="phone" required pattern="\+46[0-9]{9}" title="Please enter a valid Swedish phone number (e.g., +46701234567)">
-        <span class="error" id="phoneError">Please enter a valid Swedish phone number.</span>
+        <input type="tel" id="phone" name="phone" required aria-required="true" aria-describedby="phoneError required-note" placeholder="Enter your phone number">
+        <span class="error" id="phoneError" aria-live="polite">Please enter a phone number.</span>
       </div>
       
       <div class="form-group">
         <label for="email" class="mandatory">Email</label>
-        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-        <span class="error" id="emailError">Please enter a valid email address.</span>
+        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" aria-required="true" aria-describedby="emailError required-note" placeholder="e.g., anna@example.com">
+        <span class="error" id="emailError" aria-live="polite">Please enter a valid email address.</span>
       </div>
       
       <div class="form-group">
         <label for="message" class="mandatory">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="required-note" placeholder="Your message here..."></textarea>
       </div>
       
       <div class="form-group">
@@ -200,24 +237,38 @@
       
       <div id="petFields" class="pet-section"></div>
       
-      <button type="submit">Send</button>
+      <div class="form-group">
+        <button type="submit" id="submitButton">Send</button>
+        <button type="button" id="clearForm">Clear Form</button>
+      </div>
     </form>
     <a href="/index.html" class="home-link">Back to Home</a>
   </div>
 
   <script>
+    // Debounce function for performance
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
     // Dynamic pet fields generation
     const numPetsSelect = document.getElementById('numPets');
     const petFieldsContainer = document.getElementById('petFields');
 
     const dogBreeds = [
-      // Top 5 most popular in Sweden (2022)
       { name: 'Labrador Retriever', value: 'labrador-retriever' },
       { name: 'German Shepherd', value: 'german-shepherd' },
       { name: 'Golden Retriever', value: 'golden-retriever' },
       { name: 'Jämthund', value: 'jamthund' },
       { name: 'Border Collie', value: 'border-collie' },
-      // Other breeds in alphabetical order
       { name: 'Afghan Hound', value: 'afghan-hound' },
       { name: 'Airedale Terrier', value: 'airedale-terrier' },
       { name: 'Akita', value: 'akita' },
@@ -326,13 +377,11 @@
     ];
 
     const catBreeds = [
-      // Top 5 most popular in Sweden (2022)
       { name: 'Ragdoll', value: 'ragdoll' },
       { name: 'Maine Coon', value: 'maine-coon' },
       { name: 'Siberian', value: 'siberian' },
       { name: 'Norwegian Forest Cat', value: 'norwegian-forest-cat' },
       { name: 'Birman', value: 'birman' },
-      // Other breeds in alphabetical order
       { name: 'Abyssinian', value: 'abyssinian' },
       { name: 'American Bobtail', value: 'american-bobtail' },
       { name: 'American Curl', value: 'american-curl' },
@@ -385,27 +434,37 @@
           <h4>Pet ${i}</h4>
           <div class="form-group">
             <label for="petName${i}">Pet Name</label>
-            <input type="text" id="petName${i}" name="petName${i}">
+            <input type="text" id="petName${i}" name="petName${i}" aria-describedby="petNameHelp${i}" placeholder="e.g., Bella">
+            <span id="petNameHelp${i}" class="sr-only">Enter the pet's name</span>
           </div>
           <div class="form-group">
             <label for="petType${i}">Pet Type</label>
-            <select id="petType${i}" name="petType${i}">
+            <select id="petType${i}" name="petType${i}" aria-describedby="petTypeHelp${i}">
               <option value="">Select...</option>
               <option value="dog">Dog</option>
               <option value="cat">Cat</option>
             </select>
+            <span id="petTypeHelp${i}" class="sr-only">Select the type of pet</span>
           </div>
           <div class="form-group breed-search-container">
             <label for="breed${i}">Breed</label>
-            <input type="text" class="breed-search" id="breedSearch${i}" placeholder="Search breeds...">
-            <select id="breed${i}" name="breed${i}" class="breed-dropdown">
+            <input type="text" class="breed-search" id="breedSearch${i}" placeholder="Search breeds..." aria-describedby="breedHelp${i}">
+            <select id="breed${i}" name="breed${i}" class="breed-dropdown" aria-describedby="breedHelp${i}">
               <option value="">Select...</option>
             </select>
-            <input type="text" class="custom-breed" id="customBreed${i}" name="customBreed${i}" placeholder="Specify breed...">
+            <span id="breedHelp${i}" class="sr-only">Select or search for the pet's breed</span>
+            <input type="text" class="custom-breed" id="customBreed${i}" name="customBreed${i}" placeholder="Specify breed..." aria-describedby="customBreedHelp${i}">
+            <span id="customBreedHelp${i}" class="sr-only">Enter a custom breed if Other is selected</span>
           </div>
           <div class="form-group">
             <label for="age${i}">Age</label>
-            <input type="number" id="age${i}" name="age${i}" min="0">
+            <input type="number" id="age${i}" name="age${i}" min="0" aria-describedby="ageHelp${i}" placeholder="e.g., 3">
+            <span id="ageHelp${i}" class="sr-only">Enter the pet's age in years</span>
+          </div>
+          <div class="form-group">
+            <label for="additionalInfo${i}">Additional Information</label>
+            <textarea id="additionalInfo${i}" name="additionalInfo${i}" rows="3" aria-describedby="additionalInfoHelp${i}" placeholder="e.g., Special diet, medical needs"></textarea>
+            <span id="additionalInfoHelp${i}" class="sr-only">Enter any additional information about the pet</span>
           </div>
         `;
         petFieldsContainer.appendChild(petSection);
@@ -456,7 +515,7 @@
           breedSearch.style.display = 'none';
         });
 
-        breedSelect.addEventListener('click', () => {
+        breedSelect.addEventListener('focus', () => {
           if (petTypeSelect.value) {
             breedSearch.style.display = 'block';
           }
@@ -466,68 +525,83 @@
           customBreedInput.style.display = breedSelect.value === 'other' ? 'block' : 'none';
         });
 
-        breedSearch.addEventListener('input', () => {
+        breedSearch.addEventListener('input', debounce(() => {
           const filter = breedSearch.value.toLowerCase();
           const options = breedSelect.options;
           for (let j = 1; j < options.length; j++) {
             const text = options[j].text.toLowerCase();
             options[j].style.display = text.includes(filter) ? '' : 'none';
           }
-        });
+        }, 300));
       }
     }
 
     numPetsSelect.addEventListener('change', updatePetFields);
 
-    // Form validation
+    // Real-time validation
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const phone = document.getElementById('phone');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
+
+    firstName.addEventListener('input', () => {
+      document.getElementById('firstNameError').style.display = firstName.value.match(/[A-Za-z]{2,}/) ? 'none' : 'block';
+    });
+
+    lastName.addEventListener('input', () => {
+      document.getElementById('lastNameError').style.display = lastName.value.match(/[A-Za-z]{2,}/) ? 'none' : 'block';
+    });
+
+    phone.addEventListener('input', () => {
+      document.getElementById('phoneError').style.display = phone.value.trim() ? 'none' : 'block';
+    });
+
+    email.addEventListener('input', () => {
+      document.getElementById('emailError').style.display = email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) ? 'none' : 'block';
+    });
+
+    // Form validation on submit
     document.getElementById('contactForm').addEventListener('submit', function(event) {
       let isValid = true;
-      const firstName = document.getElementById('firstName');
-      const lastName = document.getElementById('lastName');
-      const phone = document.getElementById('phone');
-      const email = document.getElementById('email');
-      const message = document.getElementById('message');
-      
-      // First Name validation
+      const submitButton = document.getElementById('submitButton');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
       if (!firstName.value.match(/[A-Za-z]{2,}/)) {
         document.getElementById('firstNameError').style.display = 'block';
         isValid = false;
-      } else {
-        document.getElementById('firstNameError').style.display = 'none';
       }
-      
-      // Last Name validation
       if (!lastName.value.match(/[A-Za-z]{2,}/)) {
         document.getElementById('lastNameError').style.display = 'block';
         isValid = false;
-      } else {
-        document.getElementById('lastNameError').style.display = 'none';
       }
-      
-      // Phone validation (Swedish format: +46 followed by 9 digits)
-      if (!phone.value.match(/\+46[0-9]{9}/)) {
+      if (!phone.value.trim()) {
         document.getElementById('phoneError').style.display = 'block';
         isValid = false;
-      } else {
-        document.getElementById('phoneError').style.display = 'none';
       }
-      
-      // Email validation
       if (!email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
         document.getElementById('emailError').style.display = 'block';
         isValid = false;
-      } else {
-        document.getElementById('emailError').style.display = 'none';
       }
-      
-      // Message validation (ensure not empty)
       if (!message.value.trim()) {
         isValid = false;
       }
-      
+
       if (!isValid) {
         event.preventDefault();
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send';
       }
+    });
+
+    // Clear form button
+    document.getElementById('clearForm').addEventListener('click', () => {
+      document.getElementById('contactForm').reset();
+      petFieldsContainer.innerHTML = '';
+      numPetsSelect.value = '0';
+      document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+      document.querySelectorAll('.breed-search, .custom-breed').forEach(el => el.style.display = 'none');
     });
   </script>
 </body>
