@@ -216,9 +216,6 @@
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
-    .hidden-fields {
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -227,25 +224,6 @@
     <p class="form-note" id="required-note"><span class="asterisk" aria-hidden="true">*</span> Required field</p>
     <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
       <input type="hidden" name="form-name" value="contact">
-      
-      <!-- Hidden fields for dynamic pet data to ensure Netlify detection -->
-      <div class="hidden-fields">
-        ${Array.from({ length: 10 }, (_, i) => {
-          const idx = i + 1;
-          return `
-            <input type="hidden" name="petName${idx}">
-            <input type="hidden" name="petType${idx}">
-            <input type="hidden" name="breed${idx}">
-            <input type="hidden" name="customBreed${idx}">
-            <input type="hidden" name="age${idx}">
-            <textarea name="additionalInfo${idx}" style="display:none;"></textarea>
-            <input type="hidden" name="leaveDate${idx}">
-            <input type="hidden" name="leaveTime${idx}">
-            <input type="hidden" name="pickupDate${idx}">
-            <input type="hidden" name="pickupTime${idx}">
-          `;
-        }).join('')}
-      </div>
       
       <div class="form-group name-group">
         <div>
@@ -574,16 +552,6 @@
       petFieldsContainer.innerHTML = '';
       const today = new Date().toISOString().split('T')[0]; // Get today's date for min attribute
 
-      // Clear hidden fields beyond the selected number of pets
-      for (let i = 1; i <= 10; i++) {
-        if (i > numPets) {
-          ['petName', 'petType', 'breed', 'customBreed', 'age', 'additionalInfo', 'leaveDate', 'leaveTime', 'pickupDate', 'pickupTime'].forEach(field => {
-            const input = document.querySelector(`input[name="${field}${i}"], textarea[name="${field}${i}"]`);
-            if (input) input.value = '';
-          });
-        }
-      }
-
       for (let i = 1; i <= numPets; i++) {
         const petSection = document.createElement('div');
         petSection.className = 'pet-group';
@@ -833,8 +801,6 @@
       updateScheduleVisibility();
       document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
       document.querySelectorAll('.breed-search, .custom-breed').forEach(el => el.style.display = 'none');
-      // Clear all hidden fields
-      document.querySelectorAll('.hidden-fields input, .hidden-fields textarea').forEach(input => input.value = '');
     });
   </script>
 </body>
