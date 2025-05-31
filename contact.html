@@ -75,6 +75,21 @@
       color: red;
       font-weight: bold;
     }
+    .pet-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 10px;
+      padding-left: 10px;
+      border-left: 2px solid #ccc;
+    }
+    .pet-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    .pet-group h4 {
+      margin-top: 0;
+    }
   </style>
 </head>
 <body>
@@ -115,37 +130,22 @@
       
       <div class="form-group">
         <label for="numPets">Number of Pets</label>
-        <input type="number" id="numPets" name="numPets" min="0">
-      </div>
-      
-      <div class="form-group">
-        <label for="petName">Pet Name(s)</label>
-        <input type="text" id="petName" name="petName">
-      </div>
-      
-      <div class="form-group">
-        <label for="petType">Pet Type</label>
-        <select id="petType" name="petType">
-          <option value="">Select...</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
+        <select id="numPets" name="numPets">
+          <option value="0">Select...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
         </select>
       </div>
       
-      <div class="form-group">
-        <label for="petAge">Pet Age</label>
-        <input type="number" id="petAge" name="petAge" min="0">
-      </div>
-      
-      <div class="form-group">
-        <label for="species">Species</label>
-        <select id="species" name="species">
-          <option value="">Select...</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+      <div id="petFields" class="pet-section"></div>
       
       <button type="submit">Send</button>
     </form>
@@ -153,6 +153,52 @@
   </div>
 
   <script>
+    // Dynamic pet fields generation
+    const numPetsSelect = document.getElementById('numPets');
+    const petFieldsContainer = document.getElementById('petFields');
+
+    function updatePetFields() {
+      const numPets = parseInt(numPetsSelect.value) || 0;
+      petFieldsContainer.innerHTML = '';
+
+      for (let i = 1; i <= numPets; i++) {
+        const petSection = document.createElement('div');
+        petSection.className = 'pet-group';
+        petSection.innerHTML = `
+          <h4>Pet ${i}</h4>
+          <div class="form-group">
+            <label for="petName${i}">Pet Name</label>
+            <input type="text" id="petName${i}" name="petName${i}">
+          </div>
+          <div class="form-group">
+            <label for="petType${i}">Pet Type</label>
+            <select id="petType${i}" name="petType${i}">
+              <option value="">Select...</option>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="petAge${i}">Pet Age</label>
+            <input type="number" id="petAge${i}" name="petAge${i}" min="0">
+          </div>
+          <div class="form-group">
+            <label for="species${i}">Species</label>
+            <select id="species${i}" name="species${i}">
+              <option value="">Select...</option>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        `;
+        petFieldsContainer.appendChild(petSection);
+      }
+    }
+
+    numPetsSelect.addEventListener('change', updatePetFields);
+
+    // Form validation
     document.getElementById('contactForm').addEventListener('submit', function(event) {
       let isValid = true;
       const firstName = document.getElementById('firstName');
