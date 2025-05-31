@@ -26,7 +26,7 @@
       margin-bottom: 5px;
       font-weight: bold;
     }
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
@@ -56,29 +56,41 @@
     .home-link:hover {
       text-decoration: underline;
     }
+    .error {
+      color: red;
+      font-size: 12px;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Contact Us</h2>
-    <!-- Netlify form setup with required attributes -->
-    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
-      <!-- Hidden input for Netlify form name -->
+    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
       <input type="hidden" name="form-name" value="contact">
       
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required pattern="[A-Za-z]{2,}" title="Please enter a valid first name (letters only, at least 2 characters)">
+        <span class="error" id="firstNameError">Please enter a valid first name.</span>
       </div>
       
       <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" required>
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required pattern="[A-Za-z]{2,}" title="Please enter a valid last name (letters only, at least 2 characters)">
+        <span class="error" id="lastNameError">Please enter a valid last name.</span>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone (Swedish, e.g., +46701234567)</label>
+        <input type="tel" id="phone" name="phone" required pattern="\+46[0-9]{9}" title="Please enter a valid Swedish phone number starting with +46 followed by 9 digits">
+        <span class="error" id="phoneError">Please enter a valid Swedish phone number.</span>
       </div>
       
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+        <span class="error" id="emailError">Please enter a valid email address.</span>
       </div>
       
       <div class="form-group">
@@ -86,9 +98,95 @@
         <textarea id="message" name="message" rows="5" required></textarea>
       </div>
       
+      <div class="form-group">
+        <label for="numPets">Number of Pets</label>
+        <input type="number" id="numPets" name="numPets" min="0">
+      </div>
+      
+      <div class="form-group">
+        <label for="petName">Pet Name(s)</label>
+        <input type="text" id="petName" name="petName">
+      </div>
+      
+      <div class="form-group">
+        <label for="petType">Pet Type</label>
+        <select id="petType" name="petType">
+          <option value="">Select...</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="petAge">Pet Age</label>
+        <input type="number" id="petAge" name="petAge" min="0">
+      </div>
+      
+      <div class="form-group">
+        <label for="species">Species</label>
+        <select id="species" name="species">
+          <option value="">Select...</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
       <button type="submit">Send</button>
     </form>
     <a href="/index.html" class="home-link">Back to Home</a>
   </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      let isValid = true;
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const phone = document.getElementById('phone');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
+      
+      // First Name validation
+      if (!firstName.value.match(/[A-Za-z]{2,}/)) {
+        document.getElementById('firstNameError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('firstNameError').style.display = 'none';
+      }
+      
+      // Last Name validation
+      if (!lastName.value.match(/[A-Za-z]{2,}/)) {
+        document.getElementById('lastNameError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('lastNameError').style.display = 'none';
+      }
+      
+      // Phone validation (Swedish format: +46 followed by 9 digits)
+      if (!phone.value.match(/\+46[0-9]{9}/)) {
+        document.getElementById('phoneError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('phoneError').style.display = 'none';
+      }
+      
+      // Email validation
+      if (!email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('emailError').style.display = 'none';
+      }
+      
+      // Message validation (ensure not empty)
+      if (!message.value.trim()) {
+        isValid = false;
+      }
+      
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
