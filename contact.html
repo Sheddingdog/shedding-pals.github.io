@@ -37,6 +37,14 @@
       flex: 1;
       min-width: 150px;
     }
+    .schedule-option {
+      display: none;
+      margin-bottom: 15px;
+    }
+    .schedule-option label {
+      font-weight: normal;
+      margin-right: 20px;
+    }
     label {
       display: block;
       margin-bottom: 5px;
@@ -256,7 +264,32 @@
       </div>
       
       <div class="form-group">
-        <p class="calendar-comment">If all the pets would be left and picked up at the same time, choose your time here, otherwise continue to the separate field below.</p>
+        <label for="numPets">Number of Pets</label>
+        <select id="numPets" name="numPets">
+          <option value="0">Select...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      
+      <div class="form-group schedule-option" id="scheduleOption">
+        <label>Will all the pets come and leave at the same time?</label>
+        <input type="radio" id="sameScheduleYes" name="sameSchedule" value="yes">
+        <label for="sameScheduleYes">Yes</label>
+        <input type="radio" id="sameScheduleNo" name="sameSchedule" value="no">
+        <label for="sameScheduleNo">No</label>
+      </div>
+      
+      <div class="form-group" id="globalSchedule">
+        <p class="calendar-comment">Select the schedule for all pets.</p>
         <label>All Pets Schedule</label>
         <div class="calendar-group">
           <div>
@@ -292,23 +325,6 @@
         </div>
       </div>
       
-      <div class="form-group">
-        <label for="numPets">Number of Pets</label>
-        <select id="numPets" name="numPets">
-          <option value="0">Select...</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
-      
       <div id="petFields" class="pet-section"></div>
       
       <div class="form-group">
@@ -336,166 +352,41 @@
     // Dynamic pet fields generation
     const numPetsSelect = document.getElementById('numPets');
     const petFieldsContainer = document.getElementById('petFields');
+    const scheduleOption = document.getElementById('scheduleOption');
+    const globalSchedule = document.getElementById('globalSchedule');
+    const sameScheduleYes = document.getElementById('sameScheduleYes');
+    const sameScheduleNo = document.getElementById('sameScheduleNo');
 
-    const dogBreeds = [
-      { name: 'Labrador Retriever', value: 'labrador-retriever' },
-      { name: 'German Shepherd', value: 'german-shepherd' },
-      { name: 'Golden Retriever', value: 'golden-retriever' },
-      { name: 'Jämthund', value: 'jamthund' },
-      { name: 'Border Collie', value: 'border-collie' },
-      { name: 'Afghan Hound', value: 'afghan-hound' },
-      { name: 'Airedale Terrier', value: 'airedale-terrier' },
-      { name: 'Akita', value: 'akita' },
-      { name: 'Alaskan Malamute', value: 'alaskan-malamute' },
-      { name: 'American Staffordshire Terrier', value: 'american-staffordshire-terrier' },
-      { name: 'Australian Cattle Dog', value: 'australian-cattle-dog' },
-      { name: 'Australian Shepherd', value: 'australian-shepherd' },
-      { name: 'Basenji', value: 'basenji' },
-      { name: 'Basset Hound', value: 'basset-hound' },
-      { name: 'Beagle', value: 'beagle' },
-      { name: 'Belgian Malinois', value: 'belgian-malinois' },
-      { name: 'Bernese Mountain Dog', value: 'bernese-mountain-dog' },
-      { name: 'Bichon Frise', value: 'bichon-frise' },
-      { name: 'Boston Terrier', value: 'boston-terrier' },
-      { name: 'Boxer', value: 'boxer' },
-      { name: 'Brittany', value: 'brittany' },
-      { name: 'Brussels Griffon', value: 'brussels-griffon' },
-      { name: 'Bulldog', value: 'bulldog' },
-      { name: 'Bullmastiff', value: 'bullmastiff' },
-      { name: 'Cairn Terrier', value: 'cairn-terrier' },
-      { name: 'Cane Corso', value: 'cane-corso' },
-      { name: 'Cardigan Welsh Corgi', value: 'cardigan-welsh-corgi' },
-      { name: 'Cavalier King Charles Spaniel', value: 'cavalier-king-charles-spaniel' },
-      { name: 'Chihuahua', value: 'chihuahua' },
-      { name: 'Chinese Crested', value: 'chinese-crested' },
-      { name: 'Chinese Shar-Pei', value: 'chinese-shar-pei' },
-      { name: 'Chow Chow', value: 'chow-chow' },
-      { name: 'Collie', value: 'collie' },
-      { name: 'Cocker Spaniel', value: 'cocker-spaniel' },
-      { name: 'Dachshund', value: 'dachshund' },
-      { name: 'Dalmatian', value: 'dalmatian' },
-      { name: 'Danish-Swedish Farmdog', value: 'danish-swedish-farmdog' },
-      { name: 'Doberman Pinscher', value: 'doberman-pinscher' },
-      { name: 'Dogue de Bordeaux', value: 'dogue-de-bordeaux' },
-      { name: 'Drever', value: 'drever' },
-      { name: 'English Cocker Spaniel', value: 'english-cocker-spaniel' },
-      { name: 'English Springer Spaniel', value: 'english-springer-spaniel' },
-      { name: 'Finnish Lapphund', value: 'finnish-lapphund' },
-      { name: 'French Bulldog', value: 'french-bulldog' },
-      { name: 'German Pinscher', value: 'german-pinscher' },
-      { name: 'German Shorthaired Pointer', value: 'german-shorthaired-pointer' },
-      { name: 'Gotlandsstövare', value: 'gotlandsstovare' },
-      { name: 'Great Dane', value: 'great-dane' },
-      { name: 'Great Pyrenees', value: 'great-pyrenees' },
-      { name: 'Greater Swiss Mountain Dog', value: 'greater-swiss-mountain-dog' },
-      { name: 'Greyhound', value: 'greyhound' },
-      { name: 'Hälleforshund', value: 'halleforshund' },
-      { name: 'Hamiltonstövare', value: 'hamiltonstovare' },
-      { name: 'Havanese', value: 'havanese' },
-      { name: 'Italian Greyhound', value: 'italian-greyhound' },
-      { name: 'Japanese Chin', value: 'japanese-chin' },
-      { name: 'Kerry Blue Terrier', value: 'kerry-blue-terrier' },
-      { name: 'Komondor', value: 'komondor' },
-      { name: 'Kuvasz', value: 'kuvasz' },
-      { name: 'Lhasa Apso', value: 'lhasa-apso' },
-      { name: 'Lowchen', value: 'lowchen' },
-      { name: 'Maltese', value: 'maltese' },
-      { name: 'Mastiff', value: 'mastiff' },
-      { name: 'Miniature American Shepherd', value: 'miniature-american-shepherd' },
-      { name: 'Miniature Pinscher', value: 'miniature-pinscher' },
-      { name: 'Miniature Schnauzer', value: 'miniature-schnauzer' },
-      { name: 'Newfoundland', value: 'newfoundland' },
-      { name: 'Norfolk Terrier', value: 'norfolk-terrier' },
-      { name: 'Norrbottenspets', value: 'norrbottenspets' },
-      { name: 'Norwegian Elkhound', value: 'norwegian-elkhound' },
-      { name: 'Norwich Terrier', value: 'norwich-terrier' },
-      { name: 'Nova Scotia Duck Tolling Retriever', value: 'nova-scotia-duck-tolling-retriever' },
-      { name: 'Old English Sheepdog', value: 'old-english-sheepdog' },
-      { name: 'Papillon', value: 'papillon' },
-      { name: 'Pekingese', value: 'pekingese' },
-      { name: 'Pembroke Welsh Corgi', value: 'pembroke-welsh-corgi' },
-      { name: 'Petit Basset Griffon Vendeen', value: 'petit-basset-griffon-vendeen' },
-      { name: 'Pharaoh Hound', value: 'pharaoh-hound' },
-      { name: 'Pointer', value: 'pointer' },
-      { name: 'Pomeranian', value: 'pomeranian' },
-      { name: 'Poodle', value: 'poodle' },
-      { name: 'Portuguese Water Dog', value: 'portuguese-water-dog' },
-      { name: 'Pug', value: 'pug' },
-      { name: 'Rhodesian Ridgeback', value: 'rhodesian-ridgeback' },
-      { name: 'Rottweiler', value: 'rottweiler' },
-      { name: 'Saint Bernard', value: 'saint-bernard' },
-      { name: 'Saluki', value: 'saluki' },
-      { name: 'Samoyed', value: 'samoyed' },
-      { name: 'Schipperke', value: 'schipperke' },
-      { name: 'Schillerstövare', value: 'schillerstovare' },
-      { name: 'Scottish Terrier', value: 'scottish-terrier' },
-      { name: 'Shetland Sheepdog', value: 'shetland-sheepdog' },
-      { name: 'Shiba Inu', value: 'shiba-inu' },
-      { name: 'Shih Tzu', value: 'shih-tzu' },
-      { name: 'Siberian Husky', value: 'siberian-husky' },
-      { name: 'Smålandsstövare', value: 'smalandsstovare' },
-      { name: 'Soft Coated Wheaten Terrier', value: 'soft-coated-wheaten-terrier' },
-      { name: 'Staffordshire Bull Terrier', value: 'staffordshire-bull-terrier' },
-      { name: 'Standard Schnauzer', value: 'standard-schnauzer' },
-      { name: 'Swedish Lapphund', value: 'swedish-lapphund' },
-      { name: 'Swedish Vallhund', value: 'swedish-vallhund' },
-      { name: 'Swedish White Elkhound', value: 'swedish-white-elkhound' },
-      { name: 'Tibetan Spaniel', value: 'tibetan-spaniel' },
-      { name: 'Vizsla', value: 'vizsla' },
-      { name: 'Weimaraner', value: 'weimaraner' },
-      { name: 'West Highland White Terrier', value: 'west-highland-white-terrier' },
-      { name: 'Whippet', value: 'whippet' },
-      { name: 'Wirehaired Pointing Griffon', value: 'wirehaired-pointing-griffon' },
-      { name: 'Yorkshire Terrier', value: 'yorkshire-terrier' },
-      { name: 'Other', value: 'other' }
-    ];
+    let includeIndividualSchedules = true; // Track whether to include individual pet schedules
 
-    const catBreeds = [
-      { name: 'Ragdoll', value: 'ragdoll' },
-      { name: 'Maine Coon', value: 'maine-coon' },
-      { name: 'Siberian', value: 'siberian' },
-      { name: 'Norwegian Forest Cat', value: 'norwegian-forest-cat' },
-      { name: 'Birman', value: 'birman' },
-      { name: 'Abyssinian', value: 'abyssinian' },
-      { name: 'American Bobtail', value: 'american-bobtail' },
-      { name: 'American Curl', value: 'american-curl' },
-      { name: 'American Shorthair', value: 'american-shorthair' },
-      { name: 'American Wirehair', value: 'american-wirehair' },
-      { name: 'Balinese', value: 'balinese' },
-      { name: 'Bengal', value: 'bengal' },
-      { name: 'Bombay', value: 'bombay' },
-      { name: 'British Shorthair', value: 'british-shorthair' },
-      { name: 'Burmese', value: 'burmese' },
-      { name: 'Chartreux', value: 'chartreux' },
-      { name: 'Cornish Rex', value: 'cornish-rex' },
-      { name: 'Cymric', value: 'cymric' },
-      { name: 'Devon Rex', value: 'devon-rex' },
-      { name: 'Egyptian Mau', value: 'egyptian-mau' },
-      { name: 'Exotic Shorthair', value: 'exotic-shorthair' },
-      { name: 'Havana Brown', value: 'havana-brown' },
-      { name: 'Himalayan', value: 'himalayan' },
-      { name: 'Japanese Bobtail', value: 'japanese-bobtail' },
-      { name: 'Korat', value: 'korat' },
-      { name: 'LaPerm', value: 'laperm' },
-      { name: 'Manx', value: 'manx' },
-      { name: 'Munchkin', value: 'munchkin' },
-      { name: 'Ocicat', value: 'ocicat' },
-      { name: 'Oriental Shorthair', value: 'oriental-shorthair' },
-      { name: 'Persian', value: 'persian' },
-      { name: 'Pixie-Bob', value: 'pixie-bob' },
-      { name: 'Russian Blue', value: 'russian-blue' },
-      { name: 'Savannah', value: 'savannah' },
-      { name: 'Scottish Fold', value: 'scottish-fold' },
-      { name: 'Selkirk Rex', value: 'selkirk-rex' },
-      { name: 'Siamese', value: 'siamese' },
-      { name: 'Singapura', value: 'singapura' },
-      { name: 'Somali', value: 'somali' },
-      { name: 'Sphynx', value: 'sphynx' },
-      { name: 'Tonkinese', value: 'tonkinese' },
-      { name: 'Turkish Angora', value: 'turkish-angora' },
-      { name: 'Turkish Van', value: 'turkish-van' },
-      { name: 'Other', value: 'other' }
-    ];
+    function updateScheduleVisibility() {
+      const numPets = parseInt(numPetsSelect.value) || 0;
+      if (numPets > 1) {
+        scheduleOption.style.display = 'block';
+        if (sameScheduleYes.checked) {
+          globalSchedule.style.display = 'block';
+          includeIndividualSchedules = false;
+        } else if (sameScheduleNo.checked) {
+          globalSchedule.style.display = 'none';
+          includeIndividualSchedules = true;
+        } else {
+          globalSchedule.style.display = 'none';
+          includeIndividualSchedules = true;
+        }
+      } else {
+        scheduleOption.style.display = 'none';
+        globalSchedule.style.display = 'none';
+        includeIndividualSchedules = true;
+      }
+      updatePetFields(); // Rebuild pet fields based on schedule option
+    }
+
+    function clearGlobalSchedule() {
+      document.getElementById('globalLeaveDate').value = '';
+      document.getElementById('globalLeaveTime').value = '';
+      document.getElementById('globalPickupDate').value = '';
+      document.getElementById('globalPickupTime').value = '';
+    }
 
     function updatePetFields() {
       const numPets = parseInt(numPetsSelect.value) || 0;
@@ -551,6 +442,7 @@
             <textarea id="additionalInfo${i}" name="additionalInfo${i}" rows="3" aria-describedby="additionalInfoHelp${i}" placeholder="e.g., Special diet, medical needs"></textarea>
             <span id="additionalInfoHelp${i}" class="sr-only">Enter any additional information about the pet</span>
           </div>
+          ${includeIndividualSchedules ? `
           <div class="form-group">
             <label>Pet Schedule</label>
             <div class="calendar-group">
@@ -586,6 +478,7 @@
               </div>
             </div>
           </div>
+          ` : ''}
         `;
         petFieldsContainer.appendChild(petSection);
 
@@ -656,7 +549,31 @@
       }
     }
 
-    numPetsSelect.addEventListener('change', updatePetFields);
+    numPetsSelect.addEventListener('change', () => {
+      sameScheduleYes.checked = false;
+      sameScheduleNo.checked = false;
+      updateScheduleVisibility();
+    });
+
+    sameScheduleYes.addEventListener('change', () => {
+      if (sameScheduleYes.checked) {
+        updateScheduleVisibility();
+      }
+    });
+
+    sameScheduleNo.addEventListener('change', () => {
+      if (sameScheduleNo.checked) {
+        clearGlobalSchedule();
+        updateScheduleVisibility();
+      }
+    });
+
+    function clearGlobalSchedule() {
+      document.getElementById('globalLeaveDate').value = '';
+      document.getElementById('globalLeaveTime').value = '';
+      document.getElementById('globalPickupDate').value = '';
+      document.getElementById('globalPickupTime').value = '';
+    }
 
     // Real-time validation
     const firstName = document.getElementById('firstName');
@@ -708,6 +625,16 @@
         isValid = false;
       }
 
+      // Clear individual pet schedule fields if global schedule is used
+      if (sameScheduleYes.checked) {
+        for (let i = 1; i <= 10; i++) {
+          ['leaveDate', 'leaveTime', 'pickupDate', 'pickupTime'].forEach(field => {
+            const input = document.querySelector(`input[name="${field}${i}"]`);
+            if (input) input.value = '';
+          });
+        }
+      }
+
       if (!isValid) {
         event.preventDefault();
         submitButton.disabled = false;
@@ -720,6 +647,9 @@
       document.getElementById('contactForm').reset();
       petFieldsContainer.innerHTML = '';
       numPetsSelect.value = '0';
+      sameScheduleYes.checked = false;
+      sameScheduleNo.checked = false;
+      updateScheduleVisibility();
       document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
       document.querySelectorAll('.breed-search, .custom-breed').forEach(el => el.style.display = 'none');
       // Clear all hidden fields
