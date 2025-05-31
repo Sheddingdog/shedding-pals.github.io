@@ -3,80 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Form</title>
+  <title>Welcome to Our Website</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 600px;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f4f4f4;
+      text-align: center;
     }
-    .form-container {
-      background: #fff;
+    header {
+      background: #28a745;
+      color: white;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .form-group {
-      margin-bottom: 15px;
+    h1 {
+      margin: 0;
     }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+    p {
+      line-height: 1.6;
     }
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
+    .contact-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
       background-color: #28a745;
       color: white;
-      padding: 10px 15px;
-      border: none;
+      text-decoration: none;
       border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
+      font-weight: bold;
     }
-    button:hover {
+    .contact-link:hover {
       background-color: #218838;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Contact Us</h2>
-    <!-- Netlify form setup with required attributes -->
-    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
-      <!-- Hidden input for Netlify form name -->
-      <input type="hidden" name="form-name" value="contact">
-      
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-      </div>
-      
-      <button type="submit">Send</button>
-    </form>
+  <div class="container">
+    <header>
+      <h1>Welcome to Our Website</h1>
+    </header>
+    <section>
+      <p>
+        Thank you for visiting our site! We are dedicated to providing you with the best experience possible.
+        Explore our content, learn more about what we do, and feel free to get in touch with us.
+      </p>
+      <p>
+        Have a question or want to connect? Reach out through our contact form!
+      </p>
+      <a href="/contact.html" class="contact-link">Contact Us</a>
+    </section>
   </div>
 </body>
 </html>
