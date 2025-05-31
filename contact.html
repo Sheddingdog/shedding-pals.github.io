@@ -28,6 +28,15 @@
     .name-group > div {
       flex: 1;
     }
+    .calendar-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .calendar-group > div {
+      flex: 1;
+      min-width: 150px;
+    }
     label {
       display: block;
       margin-bottom: 5px;
@@ -426,6 +435,7 @@
     function updatePetFields() {
       const numPets = parseInt(numPetsSelect.value) || 0;
       petFieldsContainer.innerHTML = '';
+      const today = new Date().toISOString().split('T')[0]; // Get today's date for min attribute
 
       for (let i = 1; i <= numPets; i++) {
         const petSection = document.createElement('div');
@@ -465,6 +475,41 @@
             <label for="additionalInfo${i}">Additional Information</label>
             <textarea id="additionalInfo${i}" name="additionalInfo${i}" rows="3" aria-describedby="additionalInfoHelp${i}" placeholder="e.g., Special diet, medical needs"></textarea>
             <span id="additionalInfoHelp${i}" class="sr-only">Enter any additional information about the pet</span>
+          </div>
+          <div class="form-group">
+            <label>Pet Schedule</label>
+            <div class="calendar-group">
+              <div>
+                <label for="leaveDate${i}">Leave Date</label>
+                <input type="date" id="leaveDate${i}" name="leaveDate${i}" min="${today}" aria-describedby="leaveDateHelp${i}">
+                <span id="leaveDateHelp${i}" class="sr-only">Select the date to leave the pet</span>
+              </div>
+              <div>
+                <label for="leaveTime${i}">Leave Time</label>
+                <select id="leaveTime${i}" name="leaveTime${i}" aria-describedby="leaveTimeHelp${i}">
+                  <option value="">Select...</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Evening">Evening</option>
+                </select>
+                <span id="leaveTimeHelp${i}" class="sr-only">Select the time of day to leave the pet</span>
+              </div>
+            </div>
+            <div class="calendar-group">
+              <div>
+                <label for="pickupDate${i}">Pick Up Date</label>
+                <input type="date" id="pickupDate${i}" name="pickupDate${i}" min="${today}" aria-describedby="pickupDateHelp${i}">
+                <span id="pickupDateHelp${i}" class="sr-only">Select the date to pick up the pet</span>
+              </div>
+              <div>
+                <label for="pickupTime${i}">Pick Up Time</label>
+                <select id="pickupTime${i}" name="pickupTime${i}" aria-describedby="pickupTimeHelp${i}">
+                  <option value="">Select...</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Evening">Evening</option>
+                </select>
+                <span id="pickupTimeHelp${i}" class="sr-only">Select the time of day to pick up the pet</span>
+              </div>
+            </div>
           </div>
         `;
         petFieldsContainer.appendChild(petSection);
