@@ -21,44 +21,6 @@
     .form-group {
       margin-bottom: 15px;
     }
-    .name-group {
-      display: flex;
-      gap: 20px;
-    }
-    .name-group > div {
-      flex: 1;
-    }
-    .calendar-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .calendar-group > div {
-      flex: 1;
-      min-width: 150px;
-    }
-    .schedule-option {
-      display: none;
-      margin-bottom: 15px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background-color: #f9f9f9;
-    }
-    .schedule-option label {
-      font-weight: normal;
-      margin-right: 20px;
-      cursor: pointer;
-    }
-    .schedule-option input[type="radio"] {
-      margin-right: 5px;
-      vertical-align: middle;
-    }
-    .schedule-option .radio-group {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
     label {
       display: block;
       margin-bottom: 5px;
@@ -69,18 +31,18 @@
       color: red;
       margin-left: 5px;
     }
-    input, textarea, select {
+    input, textarea {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
     }
-    input:focus, textarea:focus, select:focus {
+    input:focus, textarea:focus {
       outline: 2px solid #28a745;
       outline-offset: 2px;
     }
-    input:hover, textarea:hover, select:hover {
+    input:hover, textarea:hover {
       border-color: #28a745;
       box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
     }
@@ -93,19 +55,8 @@
       cursor: pointer;
       font-size: 16px;
     }
-    button:hover:not(:disabled) {
+    button:hover {
       background-color: #218838;
-    }
-    button:disabled {
-      background-color: #6c757d;
-      cursor: not-allowed;
-    }
-    #clearForm {
-      background-color: #dc3545;
-      margin-left: 10px;
-    }
-    #clearForm:hover {
-      background-color: #c82333;
     }
     .home-link {
       display: block;
@@ -132,90 +83,6 @@
       color: red;
       font-weight: bold;
     }
-    .calendar-comment {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-      font-style: italic;
-    }
-    .pet-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 10px;
-      padding-left: 10px;
-      border-left: 2px solid #ccc;
-    }
-    .pet-group {
-      flex: 1;
-      min-width: 200px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-    .pet-group h4 {
-      margin-top: 0;
-    }
-    .pet-group:nth-child(1) {
-      background-color: #e6f3ff;
-    }
-    .pet-group:nth-child(2) {
-      background-color: #fff0e6;
-    }
-    .pet-group:nth-child(3) {
-      background-color: #e6ffe6;
-    }
-    .pet-group:nth-child(4) {
-      background-color: #fff5e6;
-    }
-    .pet-group:nth-child(5) {
-      background-color: #f0e6ff;
-    }
-    .pet-group:nth-child(6) {
-      background-color: #e6f0ff;
-    }
-    .pet-group:nth-child(7) {
-      background-color: #ffe6e6;
-    }
-    .pet-group:nth-child(8) {
-      background-color: #e6fff0;
-    }
-    .pet-group:nth-child(9) {
-      background-color: #f5e6ff;
-    }
-    .pet-group:nth-child(10) {
-      background-color: #e6e6ff;
-    }
-    .breed-search-container {
-      position: relative;
-    }
-    .breed-search {
-      margin-bottom: 8px;
-      display: none;
-    }
-    .breed-dropdown {
-      position: relative;
-    }
-    .custom-breed {
-      margin-top: 8px;
-      display: none;
-    }
-    optgroup[label=""]::before {
-      content: "";
-      display: block;
-      border-top: 1px solid #ccc;
-      margin: 5px 0;
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
   </style>
 </head>
 <body>
@@ -225,23 +92,16 @@
     <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
       <input type="hidden" name="form-name" value="contact">
       
-      <div class="form-group name-group">
-        <div>
-          <label for="firstName" class="mandatory">First Name</label>
-          <input type="text" id="firstName" name="firstName" required pattern="[A-Za-z]{2,}" title="Please enter a valid first name (letters only, at least 2 characters)" aria-required="true" aria-describedby="firstNameError required-note" placeholder="e.g., Anna">
-          <span class="error" id="firstNameError" aria-live="polite">Please enter a valid first name.</span>
-        </div>
-        <div>
-          <label for="lastName" class="mandatory">Last Name</label>
-          <input type="text" id="lastName" name="lastName" required pattern="[A-Za-z]{2,}" title="Please enter a valid last name (letters only, at least 2 characters)" aria-required="true" aria-describedby="lastNameError required-note" placeholder="e.g., Eriksson">
-          <span class="error" id="lastNameError" aria-live="polite">Please enter a valid last name.</span>
-        </div>
+      <div class="form-group">
+        <label for="name" class="mandatory">Name</label>
+        <input type="text" id="name" name="name" required pattern="[A-Za-z ]{2,}" title="Please enter a valid name (letters and spaces only, at least 2 characters)" aria-required="true" aria-describedby="nameError required-note" placeholder="e.g., Anna Eriksson">
+        <span class="error" id="nameError" aria-live="polite">Please enter a valid name.</span>
       </div>
       
       <div class="form-group">
-        <label for="phone" class="mandatory">Phone</label>
-        <input type="tel" id="phone" name="phone" required aria-required="true" aria-describedby="phoneError required-note" placeholder="Enter your phone number">
-        <span class="error" id="phoneError" aria-live="polite">Please enter a phone number.</span>
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" aria-describedby="phoneError" placeholder="e.g., 1234567890">
+        <span class="error" id="phoneError" aria-live="polite">Please enter a valid phone number.</span>
       </div>
       
       <div class="form-group">
@@ -252,559 +112,63 @@
       
       <div class="form-group">
         <label for="message" class="mandatory">Message</label>
-        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="required-note" placeholder="Your message here..."></textarea>
+        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageError required-note" placeholder="Your message here..."></textarea>
+        <span class="error" id="messageError" aria-live="polite">Please enter a message.</span>
       </div>
       
-      <div class="form-group">
-        <label for="numPets">Number of Pets</label>
-        <select id="numPets" name="numPets">
-          <option value="0">Select...</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
-      
-      <div class="form-group schedule-option" id="scheduleOption">
-        <label>Will all the pets come and leave at the same time?</label>
-        <div class="radio-group">
-          <input type="radio" id="sameScheduleYes" name="sameSchedule" value="yes">
-          <label for="sameScheduleYes">Yes</label>
-          <input type="radio" id="sameScheduleNo" name="sameSchedule" value="no">
-          <label for="sameScheduleNo">No</label>
-        </div>
-      </div>
-      
-      <div class="form-group" id="globalSchedule">
-        <p class="calendar-comment">Select the schedule for all pets.</p>
-        <label>All Pets Schedule</label>
-        <div class="calendar-group">
-          <div>
-            <label for="globalLeaveDate">Leave Date</label>
-            <input type="date" id="globalLeaveDate" name="globalLeaveDate" min="2025-05-31" aria-describedby="globalLeaveDateHelp">
-            <span id="globalLeaveDateHelp" class="sr-only">Select the date to leave all pets</span>
-          </div>
-          <div>
-            <label for="globalLeaveTime">Leave Time</label>
-            <select id="globalLeaveTime" name="globalLeaveTime" aria-describedby="globalLeaveTimeHelp">
-              <option value="">Select...</option>
-              <option value="Morning">Morning</option>
-              <option value="Evening">Evening</option>
-            </select>
-            <span id="globalLeaveTimeHelp" class="sr-only">Select the time of day to leave all pets</span>
-          </div>
-        </div>
-        <div class="calendar-group">
-          <div>
-            <label for="globalPickupDate">Pick Up Date</label>
-            <input type="date" id="globalPickupDate" name="globalPickupDate" min="2025-05-31" aria-describedby="globalPickupDateHelp">
-            <span id="globalPickupDateHelp" class="sr-only">Select the date to pick up all pets</span>
-          </div>
-          <div>
-            <label for="globalPickupTime">Pick Up Time</label>
-            <select id="globalPickupTime" name="globalPickupTime" aria-describedby="globalPickupTimeHelp">
-              <option value="">Select...</option>
-              <option value="Morning">Morning</option>
-              <option value="Evening">Evening</option>
-            </select>
-            <span id="globalPickupTimeHelp" class="sr-only">Select the time of day to pick up all pets</span>
-          </div>
-        </div>
-      </div>
-      
-      <div id="petFields" class="pet-section"></div>
-      
-      <div class="form-group">
-        <button type="submit" id="submitButton">Send</button>
-        <button type="button" id="clearForm">Clear Form</button>
-      </div>
+      <button type="submit">Send</button>
     </form>
     <a href="/index.html" class="home-link">Back to Home</a>
   </div>
 
   <script>
-    // Debounce function for performance
-    function debounce(func, wait) {
-      let timeout;
-      return function executedFunction(...args) {
-        const later = () => {
-          clearTimeout(timeout);
-          func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-      };
-    }
-
-    // Breed lists
-    const dogBreeds = [
-      // Top 5 most popular in Sweden (2022)
-      { name: 'Labrador Retriever', value: 'labrador-retriever' },
-      { name: 'German Shepherd', value: 'german-shepherd' },
-      { name: 'Golden Retriever', value: 'golden-retriever' },
-      { name: 'Jämthund', value: 'jamthund' },
-      { name: 'Border Collie', value: 'border-collie' },
-      // Other breeds in alphabetical order
-      { name: 'Afghan Hound', value: 'afghan-hound' },
-      { name: 'Airedale Terrier', value: 'airedale-terrier' },
-      { name: 'Akita', value: 'akita' },
-      { name: 'Alaskan Malamute', value: 'alaskan-malamute' },
-      { name: 'American Staffordshire Terrier', value: 'american-staffordshire-terrier' },
-      { name: 'Australian Cattle Dog', value: 'australian-cattle-dog' },
-      { name: 'Australian Shepherd', value: 'australian-shepherd' },
-      { name: 'Basenji', value: 'basenji' },
-      { name: 'Basset Hound', value: 'basset-hound' },
-      { name: 'Beagle', value: 'beagle' },
-      { name: 'Belgian Malinois', value: 'belgian-malinois' },
-      { name: 'Bernese Mountain Dog', value: 'bernese-mountain-dog' },
-      { name: 'Bichon Frise', value: 'bichon-frise' },
-      { name: 'Boston Terrier', value: 'boston-terrier' },
-      { name: 'Boxer', value: 'boxer' },
-      { name: 'Brittany', value: 'brittany' },
-      { name: 'Brussels Griffon', value: 'brussels-griffon' },
-      { name: 'Bulldog', value: 'bulldog' },
-      { name: 'Bullmastiff', value: 'bullmastiff' },
-      { name: 'Cairn Terrier', value: 'cairn-terrier' },
-      { name: 'Cane Corso', value: 'cane-corso' },
-      { name: 'Cardigan Welsh Corgi', value: 'cardigan-welsh-corgi' },
-      { name: 'Cavalier King Charles Spaniel', value: 'cavalier-king-charles-spaniel' },
-      { name: 'Chihuahua', value: 'chihuahua' },
-      { name: 'Chinese Crested', value: 'chinese-crested' },
-      { name: 'Chinese Shar-Pei', value: 'chinese-shar-pei' },
-      { name: 'Chow Chow', value: 'chow-chow' },
-      { name: 'Collie', value: 'collie' },
-      { name: 'Cocker Spaniel', value: 'cocker-spaniel' },
-      { name: 'Dachshund', value: 'dachshund' },
-      { name: 'Dalmatian', value: 'dalmatian' },
-      { name: 'Danish-Swedish Farmdog', value: 'danish-swedish-farmdog' },
-      { name: 'Doberman Pinscher', value: 'doberman-pinscher' },
-      { name: 'Dogue de Bordeaux', value: 'dogue-de-bordeaux' },
-      { name: 'Drever', value: 'drever' },
-      { name: 'English Cocker Spaniel', value: 'english-cocker-spaniel' },
-      { name: 'English Springer Spaniel', value: 'english-springer-spaniel' },
-      { name: 'Finnish Lapphund', value: 'finnish-lapphund' },
-      { name: 'French Bulldog', value: 'french-bulldog' },
-      { name: 'German Pinscher', value: 'german-pinscher' },
-      { name: 'German Shorthaired Pointer', value: 'german-shorthaired-pointer' },
-      { name: 'Gotlandsstövare', value: 'gotlandsstovare' },
-      { name: 'Great Dane', value: 'great-dane' },
-      { name: 'Great Pyrenees', value: 'great-pyrenees' },
-      { name: 'Greater Swiss Mountain Dog', value: 'greater-swiss-mountain-dog' },
-      { name: 'Greyhound', value: 'greyhound' },
-      { name: 'Hälleforshund', value: 'halleforshund' },
-      { name: 'Hamiltonstövare', value: 'hamiltonstovare' },
-      { name: 'Havanese', value: 'havanese' },
-      { name: 'Italian Greyhound', value: 'italian-greyhound' },
-      { name: 'Japanese Chin', value: 'japanese-chin' },
-      { name: 'Kerry Blue Terrier', value: 'kerry-blue-terrier' },
-      { name: 'Komondor', value: 'komondor' },
-      { name: 'Kuvasz', value: 'kuvasz' },
-      { name: 'Lhasa Apso', value: 'lhasa-apso' },
-      { name: 'Lowchen', value: 'lowchen' },
-      { name: 'Maltese', value: 'maltese' },
-      { name: 'Mastiff', value: 'mastiff' },
-      { name: 'Miniature American Shepherd', value: 'miniature-american-shepherd' },
-      { name: 'Miniature Pinscher', value: 'miniature-pinscher' },
-      { name: 'Miniature Schnauzer', value: 'miniature-schnauzer' },
-      { name: 'Newfoundland', value: 'newfoundland' },
-      { name: 'Norfolk Terrier', value: 'norfolk-terrier' },
-      { name: 'Norrbottenspets', value: 'norrbottenspets' },
-      { name: 'Norwegian Elkhound', value: 'norwegian-elkhound' },
-      { name: 'Norwich Terrier', value: 'norwich-terrier' },
-      { name: 'Nova Scotia Duck Tolling Retriever', value: 'nova-scotia-duck-tolling-retriever' },
-      { name: 'Old English Sheepdog', value: 'old-english-sheepdog' },
-      { name: 'Papillon', value: 'papillon' },
-      { name: 'Pekingese', value: 'pekingese' },
-      { name: 'Pembroke Welsh Corgi', value: 'pembroke-welsh-corgi' },
-      { name: 'Petit Basset Griffon Vendeen', value: 'petit-basset-griffon-vendeen' },
-      { name: 'Pharaoh Hound', value: 'pharaoh-hound' },
-      { name: 'Pointer', value: 'pointer' },
-      { name: 'Pomeranian', value: 'pomeranian' },
-      { name: 'Poodle', value: 'poodle' },
-      { name: 'Portuguese Water Dog', value: 'portuguese-water-dog' },
-      { name: 'Pug', value: 'pug' },
-      { name: 'Rhodesian Ridgeback', value: 'rhodesian-ridgeback' },
-      { name: 'Rottweiler', value: 'rottweiler' },
-      { name: 'Saint Bernard', value: 'saint-bernard' },
-      { name: 'Saluki', value: 'saluki' },
-      { name: 'Samoyed', value: 'samoyed' },
-      { name: 'Schipperke', value: 'schipperke' },
-      { name: 'Schillerstövare', value: 'schillerstovare' },
-      { name: 'Scottish Terrier', value: 'scottish-terrier' },
-      { name: 'Shetland Sheepdog', value: 'shetland-sheepdog' },
-      { name: 'Shiba Inu', value: 'shiba-inu' },
-      { name: 'Shih Tzu', value: 'shih-tzu' },
-      { name: 'Siberian Husky', value: 'siberian-husky' },
-      { name: 'Smålandsstövare', value: 'smalandsstovare' },
-      { name: 'Soft Coated Wheaten Terrier', value: 'soft-coated-wheaten-terrier' },
-      { name: 'Staffordshire Bull Terrier', value: 'staffordshire-bull-terrier' },
-      { name: 'Standard Schnauzer', value: 'standard-schnauzer' },
-      { name: 'Swedish Lapphund', value: 'swedish-lapphund' },
-      { name: 'Swedish Vallhund', value: 'swedish-vallhund' },
-      { name: 'Swedish White Elkhound', value: 'swedish-white-elkhound' },
-      { name: 'Tibetan Spaniel', value: 'tibetan-spaniel' },
-      { name: 'Vizsla', value: 'vizsla' },
-      { name: 'Weimaraner', value: 'weimaraner' },
-      { name: 'West Highland White Terrier', value: 'west-highland-white-terrier' },
-      { name: 'Whippet', value: 'whippet' },
-      { name: 'Wirehaired Pointing Griffon', value: 'wirehaired-pointing-griffon' },
-      { name: 'Yorkshire Terrier', value: 'yorkshire-terrier' },
-      { name: 'Other', value: 'other' }
-    ];
-
-    const catBreeds = [
-      // Top 5 most popular in Sweden (2022)
-      { name: 'Ragdoll', value: 'ragdoll' },
-      { name: 'Maine Coon', value: 'maine-coon' },
-      { name: 'Siberian', value: 'siberian' },
-      { name: 'Norwegian Forest Cat', value: 'norwegian-forest-cat' },
-      { name: 'Birman', value: 'birman' },
-      // Other breeds in alphabetical order
-      { name: 'Abyssinian', value: 'abyssinian' },
-      { name: 'American Bobtail', value: 'american-bobtail' },
-      { name: 'American Curl', value: 'american-curl' },
-      { name: 'American Shorthair', value: 'american-shorthair' },
-      { name: 'American Wirehair', value: 'american-wirehair' },
-      { name: 'Balinese', value: 'balinese' },
-      { name: 'Bengal', value: 'bengal' },
-      { name: 'Bombay', value: 'bombay' },
-      { name: 'British Shorthair', value: 'british-shorthair' },
-      { name: 'Burmese', value: 'burmese' },
-      { name: 'Chartreux', value: 'chartreux' },
-      { name: 'Cornish Rex', value: 'cornish-rex' },
-      { name: 'Cymric', value: 'cymric' },
-      { name: 'Devon Rex', value: 'devon-rex' },
-      { name: 'Egyptian Mau', value: 'egyptian-mau' },
-      { name: 'Exotic Shorthair', value: 'exotic-shorthair' },
-      { name: 'Havana Brown', value: 'havana-brown' },
-      { name: 'Himalayan', value: 'himalayan' },
-      { name: 'Japanese Bobtail', value: 'japanese-bobtail' },
-      { name: 'Korat', value: 'korat' },
-      { name: 'LaPerm', value: 'laperm' },
-      { name: 'Manx', value: 'manx' },
-      { name: 'Munchkin', value: 'munchkin' },
-      { name: 'Ocicat', value: 'ocicat' },
-      { name: 'Oriental Shorthair', value: 'oriental-shorthair' },
-      { name: 'Persian', value: 'persian' },
-      { name: 'Pixie-Bob', value: 'pixie-bob' },
-      { name: 'Russian Blue', value: 'russian-blue' },
-      { name: 'Savannah', value: 'savannah' },
-      { name: 'Scottish Fold', value: 'scottish-fold' },
-      { name: 'Selkirk Rex', value: 'selkirk-rex' },
-      { name: 'Siamese', value: 'siamese' },
-      { name: 'Singapura', value: 'singapura' },
-      { name: 'Somali', value: 'somali' },
-      { name: 'Sphynx', value: 'sphynx' },
-      { name: 'Tonkinese', value: 'tonkinese' },
-      { name: 'Turkish Angora', value: 'turkish-angora' },
-      { name: 'Turkish Van', value: 'turkish-van' },
-      { name: 'Other', value: 'other' }
-    ];
-
-    // Dynamic pet fields generation
-    const numPetsSelect = document.getElementById('numPets');
-    const petFieldsContainer = document.getElementById('petFields');
-    const scheduleOption = document.getElementById('scheduleOption');
-    const globalSchedule = document.getElementById('globalSchedule');
-    const sameScheduleYes = document.getElementById('sameScheduleYes');
-    const sameScheduleNo = document.getElementById('sameScheduleNo');
-
-    let includeIndividualSchedules = true; // Track whether to include individual pet schedules
-
-    function updateScheduleVisibility() {
-      const numPets = parseInt(numPetsSelect.value) || 0;
-      if (numPets > 1) {
-        scheduleOption.style.display = 'block';
-        if (sameScheduleYes.checked) {
-          globalSchedule.style.display = 'block';
-          includeIndividualSchedules = false;
-        } else if (sameScheduleNo.checked) {
-          globalSchedule.style.display = 'none';
-          includeIndividualSchedules = true;
-        } else {
-          globalSchedule.style.display = 'none';
-          includeIndividualSchedules = true;
-        }
-      } else {
-        scheduleOption.style.display = 'none';
-        globalSchedule.style.display = 'none';
-        includeIndividualSchedules = true;
-      }
-      updatePetFields(); // Rebuild pet fields based on schedule option
-    }
-
-    function clearGlobalSchedule() {
-      document.getElementById('globalLeaveDate').value = '';
-      document.getElementById('globalLeaveTime').value = '';
-      document.getElementById('globalPickupDate').value = '';
-      document.getElementById('globalPickupTime').value = '';
-    }
-
-    function updatePetFields() {
-      const numPets = parseInt(numPetsSelect.value) || 0;
-      petFieldsContainer.innerHTML = '';
-      const today = new Date().toISOString().split('T')[0]; // Get today's date for min attribute
-
-      for (let i = 1; i <= numPets; i++) {
-        const petSection = document.createElement('div');
-        petSection.className = 'pet-group';
-        petSection.innerHTML = `
-          <h4>Pet ${i}</h4>
-          <div class="form-group">
-            <label for="petName${i}">Pet Name</label>
-            <input type="text" id="petName${i}" name="petName${i}" aria-describedby="petNameHelp${i}" placeholder="e.g., Bella">
-            <span id="petNameHelp${i}" class="sr-only">Enter the pet's name</span>
-          </div>
-          <div class="form-group">
-            <label for="petType${i}">Pet Type</label>
-            <select id="petType${i}" name="petType${i}" aria-describedby="petTypeHelp${i}">
-              <option value="">Select...</option>
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-            </select>
-            <span id="petTypeHelp${i}" class="sr-only">Select the type of pet</span>
-          </div>
-          <div class="form-group breed-search-container">
-            <label for="breed${i}">Breed</label>
-            <input type="text" class="breed-search" id="breedSearch${i}" placeholder="Search breeds..." aria-describedby="breedHelp${i}">
-            <select id="breed${i}" name="breed${i}" class="breed-dropdown" aria-describedby="breedHelp${i}">
-              <option value="">Select...</option>
-            </select>
-            <span id="breedHelp${i}" class="sr-only">Select or search for the pet's breed</span>
-            <input type="text" class="custom-breed" id="customBreed${i}" name="customBreed${i}" placeholder="Specify breed..." aria-describedby="customBreedHelp${i}">
-            <span id="customBreedHelp${i}" class="sr-only">Enter a custom breed if Other is selected</span>
-          </div>
-          <div class="form-group">
-            <label for="age${i}">Age</label>
-            <input type="number" id="age${i}" name="age${i}" min="0" aria-describedby="ageHelp${i}" placeholder="e.g., 3">
-            <span id="ageHelp${i}" class="sr-only">Enter the pet's age in years</span>
-          </div>
-          <div class="form-group">
-            <label for="additionalInfo${i}">Additional Information</label>
-            <textarea id="additionalInfo${i}" name="additionalInfo${i}" rows="3" aria-describedby="additionalInfoHelp${i}" placeholder="e.g., Special diet, medical needs"></textarea>
-            <span id="additionalInfoHelp${i}" class="sr-only">Enter any additional information about the pet</span>
-          </div>
-          ${includeIndividualSchedules ? `
-          <div class="form-group">
-            <label>Pet Schedule</label>
-            <div class="calendar-group">
-              <div>
-                <label for="leaveDate${i}">Leave Date</label>
-                <input type="date" id="leaveDate${i}" name="leaveDate${i}" min="${today}" aria-describedby="leaveDateHelp${i}">
-                <span id="leaveDateHelp${i}" class="sr-only">Select the date to leave the pet</span>
-              </div>
-              <div>
-                <label for="leaveTime${i}">Leave Time</label>
-                <select id="leaveTime${i}" name="leaveTime${i}" aria-describedby="leaveTimeHelp${i}">
-                  <option value="">Select...</option>
-                  <option value="Morning">Morning</option>
-                  <option value="Evening">Evening</option>
-                </select>
-                <span id="leaveTimeHelp${i}" class="sr-only">Select the time of day to leave the pet</span>
-              </div>
-            </div>
-            <div class="calendar-group">
-              <div>
-                <label for="pickupDate${i}">Pick Up Date</label>
-                <input type="date" id="pickupDate${i}" name="pickupDate${i}" min="${today}" aria-describedby="pickupDateHelp${i}">
-                <span id="pickupDateHelp${i}" class="sr-only">Select the date to pick up the pet</span>
-              </div>
-              <div>
-                <label for="pickupTime${i}">Pick Up Time</label>
-                <select id="pickupTime${i}" name="pickupTime${i}" aria-describedby="pickupTimeHelp${i}">
-                  <option value="">Select...</option>
-                  <option value="Morning">Morning</option>
-                  <option value="Evening">Evening</option>
-                </select>
-                <span id="pickupTimeHelp${i}" class="sr-only">Select the time of day to pick up the pet</span>
-              </div>
-            </div>
-          </div>
-          ` : ''}
-        `;
-        petFieldsContainer.appendChild(petSection);
-
-        // Set up breed dropdown, search, and custom breed input
-        const petTypeSelect = document.getElementById(`petType${i}`);
-        const breedSelect = document.getElementById(`breed${i}`);
-        const breedSearch = document.getElementById(`breedSearch${i}`);
-        const customBreedInput = document.getElementById(`customBreed${i}`);
-
-        function updateBreedOptions() {
-          const selectedType = petTypeSelect.value;
-          breedSelect.innerHTML = '<option value="">Select...</option>';
-          const breeds = selectedType === 'dog' ? dogBreeds : selectedType === 'cat' ? catBreeds : [];
-
-          // Add top 5 popular breeds
-          const topBreeds = breeds.slice(0, 5);
-          if (topBreeds.length > 0) {
-            const topGroup = document.createElement('optgroup');
-            topGroup.label = 'Popular Breeds';
-            topBreeds.forEach(breed => {
-              const option = document.createElement('option');
-              option.value = breed.value;
-              option.text = breed.name;
-              topGroup.appendChild(option);
-            });
-            breedSelect.appendChild(topGroup);
-          }
-
-          // Add separator and remaining breeds
-          const otherBreeds = breeds.slice(5);
-          if (otherBreeds.length > 0) {
-            const otherGroup = document.createElement('optgroup');
-            otherGroup.label = '';
-            otherBreeds.forEach(breed => {
-              const option = document.createElement('option');
-              option.value = breed.value;
-              option.text = breed.name;
-              otherGroup.appendChild(option);
-            });
-            breedSelect.appendChild(otherGroup);
-          }
-        }
-
-        petTypeSelect.addEventListener('change', () => {
-          updateBreedOptions();
-          customBreedInput.style.display = 'none';
-          breedSearch.style.display = 'none';
-        });
-
-        breedSelect.addEventListener('focus', () => {
-          if (petTypeSelect.value) {
-            breedSearch.style.display = 'block';
-          }
-        });
-
-        breedSelect.addEventListener('change', () => {
-          customBreedInput.style.display = breedSelect.value === 'other' ? 'block' : 'none';
-        });
-
-        breedSearch.addEventListener('input', debounce(() => {
-          const filter = breedSearch.value.toLowerCase();
-          const options = breedSelect.options;
-          for (let j = 1; j < options.length; j++) {
-            const text = options[j].text.toLowerCase();
-            options[j].style.display = text.includes(filter) ? '' : 'none';
-          }
-        }, 300));
-      }
-    }
-
-    numPetsSelect.addEventListener('change', () => {
-      sameScheduleYes.checked = false;
-      sameScheduleNo.checked = false;
-      updateScheduleVisibility();
-    });
-
-    sameScheduleYes.addEventListener('change', () => {
-      if (sameScheduleYes.checked) {
-        updateScheduleVisibility();
-      }
-    });
-
-    sameScheduleNo.addEventListener('change', () => {
-      if (sameScheduleNo.checked) {
-        clearGlobalSchedule();
-        updateScheduleVisibility();
-      }
-    });
-
-    function clearGlobalSchedule() {
-      document.getElementById('globalLeaveDate').value = '';
-      document.getElementById('globalLeaveTime').value = '';
-      document.getElementById('globalPickupDate').value = '';
-      document.getElementById('globalPickupTime').value = '';
-    }
-
     // Real-time validation
-    const firstName = document.getElementById('firstName');
-    const lastName = document.getElementById('lastName');
-    const phone = document.getElementById('phone');
-    const email = document.getElementById('email');
-    const message = document.getElementById('message');
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
 
-    firstName.addEventListener('input', () => {
-      document.getElementById('firstNameError').style.display = firstName.value.match(/[A-Za-z]{2,}/) ? 'none' : 'block';
+    nameInput.addEventListener('input', () => {
+      document.getElementById('nameError').style.display = nameInput.value.match(/[A-Za-z ]{2,}/) ? 'none' : 'block';
     });
 
-    lastName.addEventListener('input', () => {
-      document.getElementById('lastNameError').style.display = lastName.value.match(/[A-Za-z]{2,}/) ? 'none' : 'block';
+    phoneInput.addEventListener('input', () => {
+      document.getElementById('phoneError').style.display = phoneInput.value.trim() === '' || phoneInput.value.match(/^\+?\d{7,15}$/) ? 'none' : 'block';
     });
 
-    phone.addEventListener('input', () => {
-      document.getElementById('phoneError').style.display = phone.value.trim() ? 'none' : 'block';
+    emailInput.addEventListener('input', () => {
+      document.getElementById('emailError').style.display = emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) ? 'none' : 'block';
     });
 
-    email.addEventListener('input', () => {
-      document.getElementById('emailError').style.display = email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) ? 'none' : 'block';
+    messageInput.addEventListener('input', () => {
+      document.getElementById('messageError').style.display = messageInput.value.trim() ? 'none' : 'block';
     });
 
-    // Form validation on submit
+    // Form submission validation
     document.getElementById('contactForm').addEventListener('submit', function(event) {
       let isValid = true;
-      const submitButton = document.getElementById('submitButton');
-      submitButton.disabled = true;
-      submitButton.textContent = 'Sending...';
 
-      if (!firstName.value.match(/[A-Za-z]{2,}/)) {
-        document.getElementById('firstNameError').style.display = 'block';
+      if (!nameInput.value.match(/[A-Za-z ]{2,}/)) {
+        document.getElementById('nameError').style.display = 'block';
         isValid = false;
       }
-      if (!lastName.value.match(/[A-Za-z]{2,}/)) {
-        document.getElementById('lastNameError').style.display = 'block';
-        isValid = false;
-      }
-      if (!phone.value.trim()) {
+      if (phoneInput.value.trim() && !phoneInput.value.match(/^\+?\d{7,15}$/)) {
         document.getElementById('phoneError').style.display = 'block';
         isValid = false;
       }
-      if (!email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
+      if (!emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
         document.getElementById('emailError').style.display = 'block';
         isValid = false;
       }
-      if (!message.value.trim()) {
+      if (!messageInput.value.trim()) {
+        document.getElementById('messageError').style.display = 'block';
         isValid = false;
-      }
-
-      // Clear individual pet schedule fields if global schedule is used
-      if (sameScheduleYes.checked) {
-        for (let i = 1; i <= 10; i++) {
-          ['leaveDate', 'leaveTime', 'pickupDate', 'pickupTime'].forEach(field => {
-            const input = document.querySelector(`input[name="${field}${i}"]`);
-            if (input) input.value = '';
-          });
-        }
       }
 
       if (!isValid) {
         event.preventDefault();
-        submitButton.disabled = false;
-        submitButton.textContent = 'Send';
       }
     });
-
-    // Clear form button
-    document.getElementById('clearForm').addEventListener('click', () => {
-      document.getElementById('contactForm').reset();
-      petFieldsContainer.innerHTML = '';
-      numPetsSelect.value = '0';
-      sameScheduleYes.checked = false;
-      sameScheduleNo.checked = false;
-      updateScheduleVisibility();
-      document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
-      document.querySelectorAll('.breed-search, .custom-breed').forEach(el => el.style.display = 'none');
-    });
-
-    // Initialize form
-    updateScheduleVisibility();
   </script>
 </body>
 </html>
