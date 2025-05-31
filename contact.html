@@ -110,6 +110,12 @@
       color: red;
       font-weight: bold;
     }
+    .calendar-comment {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
     .pet-section {
       display: flex;
       flex-wrap: wrap;
@@ -225,6 +231,43 @@
       <div class="form-group">
         <label for="message" class="mandatory">Message</label>
         <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="required-note" placeholder="Your message here..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <p class="calendar-comment">If all the pets would be left and picked up at the same time, choose your time here, otherwise continue to the separate field below.</p>
+        <label>All Pets Schedule</label>
+        <div class="calendar-group">
+          <div>
+            <label for="globalLeaveDate">Leave Date</label>
+            <input type="date" id="globalLeaveDate" name="globalLeaveDate" min="2025-05-31" aria-describedby="globalLeaveDateHelp">
+            <span id="globalLeaveDateHelp" class="sr-only">Select the date to leave all pets</span>
+          </div>
+          <div>
+            <label for="globalLeaveTime">Leave Time</label>
+            <select id="globalLeaveTime" name="globalLeaveTime" aria-describedby="globalLeaveTimeHelp">
+              <option value="">Select...</option>
+              <option value="Morning">Morning</option>
+              <option value="Evening">Evening</option>
+            </select>
+            <span id="globalLeaveTimeHelp" class="sr-only">Select the time of day to leave all pets</span>
+          </div>
+        </div>
+        <div class="calendar-group">
+          <div>
+            <label for="globalPickupDate">Pick Up Date</label>
+            <input type="date" id="globalPickupDate" name="globalPickupDate" min="2025-05-31" aria-describedby="globalPickupDateHelp">
+            <span id="globalPickupDateHelp" class="sr-only">Select the date to pick up all pets</span>
+          </div>
+          <div>
+            <label for="globalPickupTime">Pick Up Time</label>
+            <select id="globalPickupTime" name="globalPickupTime" aria-describedby="globalPickupTimeHelp">
+              <option value="">Select...</option>
+              <option value="Morning">Morning</option>
+              <option value="Evening">Evening</option>
+            </select>
+            <span id="globalPickupTimeHelp" class="sr-only">Select the time of day to pick up all pets</span>
+          </div>
+        </div>
       </div>
       
       <div class="form-group">
