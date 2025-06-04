@@ -7,24 +7,83 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
       background-color: #f4f4f4;
+      color: #333;
+    }
+    .navbar {
+      background-color: #28a745;
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .navbar li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .navbar a:hover {
+      color: #f4f4f4;
+    }
+    .navbar .highlight {
+      background-color: #218838;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .navbar .highlight:hover {
+      background-color: #1e7e34;
+    }
+    .container {
+      max-width: 800px;
+      margin: 80px auto 0;
+      padding: 20px;
+      text-align: center;
+    }
+    header {
+      background: #28a745;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h1 {
+      margin: 0;
+    }
+    p {
+      line-height: 1.6;
     }
     .form-container {
       background: #fff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .form-group {
       margin-bottom: 15px;
+      text-align: left;
     }
     label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
+      text-align: left;
     }
     .mandatory::after {
       content: '*';
@@ -58,16 +117,18 @@
     button:hover {
       background-color: #218838;
     }
-    .home-link {
-      display: block;
+    .back-button {
+      display: inline-block;
       margin-top: 20px;
-      text-align: center;
-      color: #28a745;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
       text-decoration: none;
+      border-radius: 4px;
       font-weight: bold;
     }
-    .home-link:hover {
-      text-decoration: underline;
+    .back-button:hover {
+      background-color: #218838;
     }
     .error {
       color: red;
@@ -78,47 +139,74 @@
       font-size: 14px;
       color: #555;
       margin-bottom: 20px;
+      text-align: left;
     }
     .form-note .asterisk {
       color: red;
       font-weight: bold;
     }
+    .contact-info {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Contact Us</h2>
-    <p class="form-note" id="required-note"><span class="asterisk" aria-hidden="true">*</span> Required field</p>
-    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
-      <input type="hidden" name="form-name" value="contact">
-      
-      <div class="form-group">
-        <label for="name" class="mandatory">Name</label>
-        <input type="text" id="name" name="name" required pattern="[A-Za-z ]{2,}" title="Please enter a valid name (letters and spaces only, at least 2 characters)" aria-required="true" aria-describedby="nameError required-note" placeholder="e.g., Anna Eriksson">
-        <span class="error" id="nameError" aria-live="polite">Please enter a valid name.</span>
+  <nav class="navbar">
+    <ul>
+      <li><a href="/about.html">About Us</a></li>
+      <li><a href="/services.html">Services & Price</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/contact.html">Contact Us</a></li>
+      <li><a href="/booking.html" class="highlight">Book a Place Now!</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <header>
+      <h1>Contact Us</h1>
+    </header>
+    <section>
+      <p>
+        We’d love to hear from you! Reach out with any questions, feedback, or inquiries.
+      </p>
+      <div class="form-container">
+        <p class="form-note" id="required-note"><span class="asterisk" aria-hidden="true">*</span> Required field</p>
+        <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
+          <input type="hidden" name="form-name" value="contact">
+          
+          <div class="form-group">
+            <label for="name" class="mandatory">Name</label>
+            <input type="text" id="name" name="name" required pattern="[A-Za-z ]{2,}" title="Please enter a valid name (letters and spaces only, at least 2 characters)" aria-required="true" aria-describedby="nameError required-note" placeholder="e.g., Anna Eriksson">
+            <span class="error" id="nameError" aria-live="polite">Please enter a valid name.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" aria-describedby="phoneError" placeholder="e.g., 1234567890">
+            <span class="error" id="phoneError" aria-live="polite">Please enter a valid phone number.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="mandatory">Email</label>
+            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" aria-required="true" aria-describedby="emailError required-note" placeholder="e.g., anna@example.com">
+            <span class="error" id="emailError" aria-live="polite">Please enter a valid email address.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="mandatory">Message</label>
+            <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageError required-note" placeholder="Your message here..."></textarea>
+            <span class="error" id="messageError" aria-live="polite">Please enter a message.</span>
+          </div>
+          
+          <button type="submit">Send</button>
+        </form>
       </div>
-      
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" aria-describedby="phoneError" placeholder="e.g., 1234567890">
-        <span class="error" id="phoneError" aria-live="polite">Please enter a valid phone number.</span>
+      <div class="contact-info">
+        <p>Email: info@ourwebsite.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Address: 123 Main Street, City, Country</p>
       </div>
-      
-      <div class="form-group">
-        <label for="email" class="mandatory">Email</label>
-        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" aria-required="true" aria-describedby="emailError required-note" placeholder="e.g., anna@example.com">
-        <span class="error" id="emailError" aria-live="polite">Please enter a valid email address.</span>
-      </div>
-      
-      <div class="form-group">
-        <label for="message" class="mandatory">Message</label>
-        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageError required-note" placeholder="Your message here..."></textarea>
-        <span class="error" id="messageError" aria-live="polite">Please enter a message.</span>
-      </div>
-      
-      <button type="submit">Send</button>
-    </form>
-    <a href="/index.html" class="home-link">Back to Home</a>
+      <a href="/index.html" class="back-button">Back to Home</a>
+    </section>
   </div>
 
   <script>
