@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Our Website</title>
+  <title>Welcome to Our Pet-Friendly Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      background-color: #F8F1E9;
       color: #333;
     }
     .navbar {
-      background-color: #28a745;
-      padding: 15px 0;
+      background-color: rgba(74, 112, 67, 0.95);
+      padding: 20px 0;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .navbar ul {
       list-style-type: none;
@@ -33,37 +35,141 @@
     .navbar a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 16px;
+      transition: color 0.3s ease;
     }
     .navbar a:hover {
-      color: #f4f4f4;
+      color: #F8F1E9;
     }
     .navbar .highlight {
-      background-color: #218838;
+      background-color: #E07A5F;
       padding: 8px 12px;
       border-radius: 4px;
+      color: white;
+      transition: background-color 0.3s ease;
     }
     .navbar .highlight:hover {
-      background-color: #1e7e34;
+      background-color: #D55A3F;
     }
-    .container {
-      max-width: 800px;
-      margin: 80px auto 0;
-      padding: 20px;
-      text-align: center;
-    }
-    header {
-      background: #28a745;
+    .hero {
+      background: linear-gradient(135deg, rgba(74, 112, 67, 0.9), rgba(168, 195, 167, 0.9)), url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIElEQVQYV2NkYGD4z4ABMIIJqQJAMgUHYEALBgZgYJABAEoFAyIuG7wAAAAASUVORK5CYII=');
       color: white;
-      padding: 20px;
-      border-radius: 8px;
+      padding: 100px 20px;
+      text-align: center;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 80px;
     }
-    h1 {
+    .hero h1 {
+      font-size: 48px;
       margin: 0;
+      font-weight: 600;
+      animation: fadeInDown 1s ease-in-out;
     }
-    p {
+    .hero p {
+      font-size: 20px;
+      margin: 20px 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s ease-in-out 0.3s;
+      animation-fill-mode: backwards;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #E07A5F;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 25px;
+      font-size: 18px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+      animation: fadeInUp 1s ease-in-out 0.6s;
+      animation-fill-mode: backwards;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      filter: drop-shadow(0 0 10px rgba(224, 122, 95, 0.5));
+    }
+    .content-section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border: 1px solid #e0e0e0;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .card.mission::before {
+      content: '🐶';
+      display: block;
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #4A7043;
+    }
+    .card.contact::before {
+      content: '🐾';
+      display: block;
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #4A7043;
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      color: #4A7043;
+      font-weight: 600;
+    }
+    .card p {
       line-height: 1.6;
+      color: #555;
+    }
+    .card-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #E07A5F;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .card-button:hover {
+      background-color: #D55A3F;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 16px; }
+      .cta-button { padding: 10px 20px; font-size: 16px; }
+      .navbar li { margin: 0 10px; }
+      .navbar a { font-size: 14px; }
+      .card::before { font-size: 20px; }
     }
   </style>
 </head>
@@ -77,19 +183,21 @@
       <li><a href="/booking.html" class="highlight">Book a Place Now!</a></li>
     </ul>
   </nav>
-  <div class="container">
-    <header>
-      <h1>Welcome to Our Website</h1>
-    </header>
-    <section>
-      <p>
-        Thank you for visiting our site! We are dedicated to providing you with the best experience possible.
-        Explore our content, learn more about what we do, and feel free to get in touch with us.
-      </p>
-      <p>
-        Have a question or want to connect? Reach out through our contact form!
-      </p>
-    </section>
+  <div class="hero">
+    <h1>Welcome to Our Pet-Friendly World</h1>
+    <p>Bring your furry friends and explore a cozy, pet-loving experience inspired by Sweden’s nature!</p>
+    <a href="/booking.html" class="cta-button">Book a Pet-Friendly Experience</a>
+  </div>
+  <div class="content-section">
+    <div class="card mission">
+      <h3>Our Mission</h3>
+      <p>We are dedicated to providing you and your pets with the best experience possible, tailored to your needs.</p>
+    </div>
+    <div class="card contact">
+      <h3>Get in Touch</h3>
+      <p>Have a question or want to connect? Reach out through our contact form!</p>
+      <a href="/contact.html" class="card-button">Contact Us</a>
+    </div>
   </div>
 </body>
 </html>
