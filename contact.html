@@ -4,21 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      background-color: #F8F1E9;
       color: #333;
     }
     .navbar {
-      background-color: #28a745;
-      padding: 15px 0;
+      background-color: rgba(74, 112, 67, 0.95);
+      padding: 20px 0;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .navbar ul {
       list-style-type: none;
@@ -33,43 +35,55 @@
     .navbar a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 16px;
+      transition: color 0.3s ease;
     }
     .navbar a:hover {
-      color: #f4f4f4;
+      color: #F8F1E9;
     }
     .navbar .highlight {
-      background-color: #218838;
+      background-color: #E07A5F;
       padding: 8px 12px;
       border-radius: 4px;
+      color: white;
+      transition: background-color 0.3s ease;
     }
     .navbar .highlight:hover {
-      background-color: #1e7e34;
+      background-color: #D55A3F;
     }
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 80px auto 0;
       padding: 20px;
       text-align: center;
     }
     header {
-      background: #28a745;
+      background: linear-gradient(135deg, rgba(74, 112, 67, 0.9), rgba(168, 195, 167, 0.9)), url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIElEQVQYV2NkYGD4z4ABMIIJqQJAMgUHYEALBgZgYJABAEoFAyIuG7wAAAAASUVORK5CYII=');
       color: white;
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header::before {
+      content: '🐾';
+      display: block;
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: white;
     }
     h1 {
       margin: 0;
+      font-weight: 600;
     }
     p {
       line-height: 1.6;
     }
     .form-container {
-      background: #fff;
+      background: white;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       margin-top: 20px;
       max-width: 600px;
       margin-left: auto;
@@ -82,8 +96,9 @@
     label {
       display: block;
       margin-bottom: 5px;
-      font-weight: bold;
+      font-weight: 600;
       text-align: left;
+      color: #4A7043;
     }
     .mandatory::after {
       content: '*';
@@ -93,42 +108,45 @@
     input, textarea {
       width: 100%;
       padding: 8px;
-      border: 1px solid #ccc;
+      border: 1px solid #e0e0e0;
       border-radius: 4px;
       box-sizing: border-box;
     }
     input:focus, textarea:focus {
-      outline: 2px solid #28a745;
+      outline: 2px solid #E07A5F;
       outline-offset: 2px;
     }
     input:hover, textarea:hover {
-      border-color: #28a745;
-      box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+      border-color: #E07A5F;
+      box-shadow: 0 0 5px rgba(224, 122, 95, 0.3);
     }
     button {
-      background-color: #28a745;
+      background-color: #E07A5F;
       color: white;
       padding: 10px 15px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #218838;
+      background-color: #D55A3F;
     }
     .back-button {
       display: inline-block;
       margin-top: 20px;
       padding: 10px 20px;
-      background-color: #28a745;
+      background-color: #E07A5F;
       color: white;
       text-decoration: none;
       border-radius: 4px;
-      font-weight: bold;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
     }
     .back-button:hover {
-      background-color: #218838;
+      background-color: #D55A3F;
     }
     .error {
       color: red;
@@ -147,6 +165,17 @@
     }
     .contact-info {
       margin-top: 20px;
+      text-align: left;
+    }
+    .contact-info p {
+      margin: 10px 0;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      .navbar li { margin: 0 10px; }
+      .navbar a { font-size: 14px; }
+      .form-container { max-width: 100%; }
+      header::before { font-size: 20px; }
     }
   </style>
 </head>
@@ -165,38 +194,31 @@
       <h1>Contact Us</h1>
     </header>
     <section>
-      <p>
-        We’d love to hear from you! Reach out with any questions, feedback, or inquiries.
-      </p>
+      <p>We’d love to hear from you and your pets! Reach out with any questions or inquiries.</p>
       <div class="form-container">
         <p class="form-note" id="required-note"><span class="asterisk" aria-hidden="true">*</span> Required field</p>
         <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
           <input type="hidden" name="form-name" value="contact">
-          
           <div class="form-group">
             <label for="name" class="mandatory">Name</label>
             <input type="text" id="name" name="name" required pattern="[A-Za-z ]{2,}" title="Please enter a valid name (letters and spaces only, at least 2 characters)" aria-required="true" aria-describedby="nameError required-note" placeholder="e.g., Anna Eriksson">
             <span class="error" id="nameError" aria-live="polite">Please enter a valid name.</span>
           </div>
-          
           <div class="form-group">
             <label for="phone">Phone</label>
             <input type="tel" id="phone" name="phone" aria-describedby="phoneError" placeholder="e.g., 1234567890">
             <span class="error" id="phoneError" aria-live="polite">Please enter a valid phone number.</span>
           </div>
-          
           <div class="form-group">
             <label for="email" class="mandatory">Email</label>
             <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" aria-required="true" aria-describedby="emailError required-note" placeholder="e.g., anna@example.com">
             <span class="error" id="emailError" aria-live="polite">Please enter a valid email address.</span>
           </div>
-          
           <div class="form-group">
             <label for="message" class="mandatory">Message</label>
             <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageError required-note" placeholder="Your message here..."></textarea>
             <span class="error" id="messageError" aria-live="polite">Please enter a message.</span>
           </div>
-          
           <button type="submit">Send</button>
         </form>
       </div>
@@ -205,37 +227,28 @@
         <p>Phone: (123) 456-7890</p>
         <p>Address: 123 Main Street, City, Country</p>
       </div>
-      <a href="/index.html" class="back-button">Back to Home</a>
+      <a href="/index_se.html" class="back-button">Back to Home</a>
     </section>
   </div>
-
   <script>
-    // Real-time validation
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
     const emailInput = document.getElementById('email');
     const messageInput = document.getElementById('message');
-
     nameInput.addEventListener('input', () => {
       document.getElementById('nameError').style.display = nameInput.value.match(/[A-Za-z ]{2,}/) ? 'none' : 'block';
     });
-
     phoneInput.addEventListener('input', () => {
       document.getElementById('phoneError').style.display = phoneInput.value.trim() === '' || phoneInput.value.match(/^\+?\d{7,15}$/) ? 'none' : 'block';
     });
-
     emailInput.addEventListener('input', () => {
       document.getElementById('emailError').style.display = emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) ? 'none' : 'block';
     });
-
     messageInput.addEventListener('input', () => {
       document.getElementById('messageError').style.display = messageInput.value.trim() ? 'none' : 'block';
     });
-
-    // Form submission validation
     document.getElementById('contactForm').addEventListener('submit', function(event) {
       let isValid = true;
-
       if (!nameInput.value.match(/[A-Za-z ]{2,}/)) {
         document.getElementById('nameError').style.display = 'block';
         isValid = false;
@@ -252,7 +265,6 @@
         document.getElementById('messageError').style.display = 'block';
         isValid = false;
       }
-
       if (!isValid) {
         event.preventDefault();
       }
