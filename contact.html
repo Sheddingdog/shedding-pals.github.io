@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us</title>
+  <title data-key="site-title">Kontakta oss</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="alternate" hreflang="en" href="/contact.html?lang=en">
+  <link rel="alternate" hreflang="sv" href="/contact.html?lang=sv">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -21,6 +23,7 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
     }
     .navbar ul {
       list-style-type: none;
@@ -51,6 +54,33 @@
     }
     .navbar .highlight:hover {
       background-color: #D55A3F;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: #FFFFFF;
+      color: #4A7043;
+      border: 1px solid #4A7043;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .lang-switcher:hover {
+      background-color: #A8C3A7;
+      color: white;
+    }
+    .lang-switcher:focus {
+      outline: 2px solid #E07A5F;
+      outline-offset: 2px;
     }
     .container {
       max-width: 1000px;
@@ -131,9 +161,6 @@
       font-weight: 600;
       transition: background-color 0.3s ease;
     }
-    button:hover {
-      background-color: #D55A3F;
-    }
     .back-button {
       display: inline-block;
       margin-top: 20px;
@@ -176,98 +203,206 @@
       .navbar a { font-size: 14px; }
       .form-container { max-width: 100%; }
       header::before { font-size: 20px; }
+      .lang-switcher { right: 10px; width: 36px; height: 36px; font-size: 12px; }
     }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <ul>
-      <li><a href="/about.html">About Us</a></li>
-      <li><a href="/services.html">Services & Price</a></li>
-      <li><a href="/gallery.html">Gallery</a></li>
-      <li><a href="/contact.html">Contact Us</a></li>
-      <li><a href="/booking.html" class="highlight">Book a Place Now!</a></li>
+      <li><a href="/about.html" data-key="nav-about">Om oss</a></li>
+      <li><a href="/services.html" data-key="nav-services">Tjänster & Pris</a></li>
+      <li><a href="/gallery.html" data-key="nav-gallery">Galleri</a></li>
+      <li><a href="/contact.html" data-key="nav-contact">Kontakta oss</a></li>
+      <li><a href="/booking.html" class="highlight" data-key="nav-booking">Boka en plats nu!</a></li>
     </ul>
+    <button class="lang-switcher" onclick="switchLanguage('en')" data-key="lang-switch" aria-label="Byt till engelska" aria-current="false" tabindex="0">🌐 EN</button>
   </nav>
   <div class="container">
     <header>
-      <h1>Contact Us</h1>
+      <h1 data-key="contact-title">Kontakta oss</h1>
     </header>
     <section>
-      <p>We’d love to hear from you and your pets! Reach out with any questions or inquiries.</p>
+      <p data-key="contact-text">Vi vill gärna höra från dig och dina husdjur! Kontakta oss med frågor eller funderingar.</p>
       <div class="form-container">
-        <p class="form-note" id="required-note"><span class="asterisk" aria-hidden="true">*</span> Required field</p>
+        <p class="form-note" id="required-note" data-key="required-note"><span class="asterisk" aria-hidden="true">*</span> Obligatoriskt fält</p>
         <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" id="contactForm">
           <input type="hidden" name="form-name" value="contact">
           <div class="form-group">
-            <label for="name" class="mandatory">Name</label>
-            <input type="text" id="name" name="name" required pattern="[A-Za-z ]{2,}" title="Please enter a valid name (letters and spaces only, at least 2 characters)" aria-required="true" aria-describedby="nameError required-note" placeholder="e.g., Anna Eriksson">
-            <span class="error" id="nameError" aria-live="polite">Please enter a valid name.</span>
+            <label for="name" class="mandatory" data-key="form-name-label">Namn</label>
+            <input type="text" id="name" name="name" required pattern="[A-Za-z ]{2,}" data-key="form-name-placeholder" title="Vänligen ange ett giltigt namn (endast bokstäver och mellanslag, minst 2 tecken)" aria-required="true" aria-describedby="nameError required-note" placeholder="t.ex. Anna Eriksson">
+            <span class="error" id="nameError" aria-live="polite" data-key="form-name-error">Vänligen ange ett giltigt namn.</span>
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" aria-describedby="phoneError" placeholder="e.g., 1234567890">
-            <span class="error" id="phoneError" aria-live="polite">Please enter a valid phone number.</span>
+            <label for="phone" data-key="form-phone-label">Telefon</label>
+            <input type="tel" id="phone" name="phone" aria-describedby="phoneError" data-key="form-phone-placeholder" placeholder="t.ex. 1234567890">
+            <span class="error" id="phoneError" aria-live="polite" data-key="form-phone-error">Vänligen ange ett giltigt telefonnummer.</span>
           </div>
           <div class="form-group">
-            <label for="email" class="mandatory">Email</label>
-            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" aria-required="true" aria-describedby="emailError required-note" placeholder="e.g., anna@example.com">
-            <span class="error" id="emailError" aria-live="polite">Please enter a valid email address.</span>
+            <label for="email" class="mandatory" data-key="form-email-label">E-post</label>
+            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" data-key="form-email-placeholder" title="Vänligen ange en giltig e-postadress" aria-required="true" aria-describedby="emailError required-note" placeholder="t.ex. anna@exempel.com">
+            <span class="error" id="emailError" aria-live="polite" data-key="form-email-error">Vänligen ange en giltig e-postadress.</span>
           </div>
           <div class="form-group">
-            <label for="message" class="mandatory">Message</label>
-            <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageError required-note" placeholder="Your message here..."></textarea>
-            <span class="error" id="messageError" aria-live="polite">Please enter a message.</span>
+            <label for="message" class="mandatory" data-key="form-message-label">Meddelande</label>
+            <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageError required-note" data-key="form-message-placeholder" placeholder="Ditt meddelande här..."></textarea>
+            <span class="error" id="messageError" aria-live="polite" data-key="form-message-error">Vänligen ange ett meddelande.</span>
           </div>
-          <button type="submit">Send</button>
+          <button type="submit" data-key="form-submit">Skicka</button>
         </form>
       </div>
       <div class="contact-info">
-        <p>Email: info@ourwebsite.com</p>
-        <p>Phone: (123) 456-7890</p>
-        <p>Address: 123 Main Street, City, Country</p>
+        <p data-key="contact-email">E-post: info@ourwebsite.com</p>
+        <p data-key="contact-phone">Telefon: (123) 456-7890</p>
+        <p data-key="contact-address">Adress: Huvudgatan 123, Stad, Land</p>
       </div>
-      <a href="/index.html" class="back-button">Back to Home</a>
+      <a href="/index.html" class="back-button" data-key="back-home">Tillbaka till startsidan</a>
     </section>
   </div>
   <script>
-    const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    nameInput.addEventListener('input', () => {
-      document.getElementById('nameError').style.display = nameInput.value.match(/[A-Za-z ]{2,}/) ? 'none' : 'block';
-    });
-    phoneInput.addEventListener('input', () => {
-      document.getElementById('phoneError').style.display = phoneInput.value.trim() === '' || phoneInput.value.match(/^\+?\d{7,15}$/) ? 'none' : 'block';
-    });
-    emailInput.addEventListener('input', () => {
-      document.getElementById('emailError').style.display = emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) ? 'none' : 'block';
-    });
-    messageInput.addEventListener('input', () => {
-      document.getElementById('messageError').style.display = messageInput.value.trim() ? 'none' : 'block';
-    });
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-      let isValid = true;
-      if (!nameInput.value.match(/[A-Za-z ]{2,}/)) {
-        document.getElementById('nameError').style.display = 'block';
-        isValid = false;
+    const translations = {
+      sv: {
+        'site-title': 'Kontakta oss',
+        'nav-about': 'Om oss',
+        'nav-services': 'Tjänster & Pris',
+        'nav-gallery': 'Galleri',
+        'nav-contact': 'Kontakta oss',
+        'nav-booking': 'Boka en plats nu!',
+        'lang-switch': '🌐 EN',
+        'contact-title': 'Kontakta oss',
+        'contact-text': 'Vi vill gärna höra från dig och dina husdjur! Kontakta oss med frågor eller funderingar.',
+        'required-note': '* Obligatoriskt fält',
+        'form-name-label': 'Namn',
+        'form-name-placeholder': 't.ex. Anna Eriksson',
+        'form-name-error': 'Vänligen ange ett giltigt namn.',
+        'form-phone-label': 'Telefon',
+        'form-phone-placeholder': 't.ex. 1234567890',
+        'form-phone-error': 'Vänligen ange ett giltigt telefonnummer.',
+        'form-email-label': 'E-post',
+        'form-email-placeholder': 't.ex. anna@exempel.com',
+        'form-email-error': 'Vänligen ange en giltig e-postadress.',
+        'form-message-label': 'Meddelande',
+        'form-message-placeholder': 'Ditt meddelande här...',
+        'form-message-error': 'Vänligen ange ett meddelande.',
+        'form-submit': 'Skicka',
+        'contact-email': 'E-post: info@ourwebsite.com',
+        'contact-phone': 'Telefon: (123) 456-7890',
+        'contact-address': 'Adress: Huvudgatan 123, Stad, Land',
+        'back-home': 'Tillbaka till startsidan'
+      },
+      en: {
+        'site-title': 'Contact Us',
+        'nav-about': 'About Us',
+        'nav-services': 'Services & Price',
+        'nav-gallery': 'Gallery',
+        'nav-contact': 'Contact Us',
+        'nav-booking': 'Book a Place Now!',
+        'lang-switch': '🌐 SV',
+        'contact-title': 'Contact Us',
+        'contact-text': 'We’d love to hear from you and your pets! Reach out with any questions or inquiries.',
+        'required-note': '* Required field',
+        'form-name-label': 'Name',
+        'form-name-placeholder': 'e.g., Anna Eriksson',
+        'form-name-error': 'Please enter a valid name.',
+        'form-phone-label': 'Phone',
+        'form-phone-placeholder': 'e.g., 1234567890',
+        'form-phone-error': 'Please enter a valid phone number.',
+        'form-email-label': 'Email',
+        'form-email-placeholder': 'e.g., anna@example.com',
+        'form-email-error': 'Please enter a valid email address.',
+        'form-message-label': 'Message',
+        'form-message-placeholder': 'Your message here...',
+        'form-message-error': 'Please enter a message.',
+        'form-submit': 'Send',
+        'contact-email': 'Email: info@ourwebsite.com',
+        'contact-phone': 'Phone: (123) 456-7890',
+        'contact-address': 'Address: 123 Main Street, City, Country',
+        'back-home': 'Back to Home'
       }
-      if (phoneInput.value.trim() && !phoneInput.value.match(/^\+?\d{7,15}$/)) {
-        document.getElementById('phoneError').style.display = 'block';
-        isValid = false;
-      }
-      if (!emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
-        document.getElementById('emailError').style.display = 'block';
-        isValid = false;
-      }
-      if (!messageInput.value.trim()) {
-        document.getElementById('messageError').style.display = 'block';
-        isValid = false;
-      }
-      if (!isValid) {
-        event.preventDefault();
-      }
+    };
+
+    function switchLanguage(lang) {
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          if (key.includes('placeholder')) {
+            element.placeholder = translations[lang][key];
+          } else if (key.includes('title')) {
+            element.title = translations[lang][key];
+          }
+        } else {
+          element.textContent = translations[lang][key];
+        }
+        if (element.classList.contains('lang-switcher')) {
+          element.setAttribute('aria-label', lang === 'sv' ? 'Byt till engelska' : 'Switch to Swedish');
+          element.setAttribute('aria-current', lang === 'sv' ? 'false' : 'true');
+          element.onclick = () => switchLanguage(lang === 'sv' ? 'en' : 'sv');
+        }
+      });
+      document.querySelector('title').textContent = translations[lang]['site-title'];
+      updateValidationMessages(lang);
+    }
+
+    function updateValidationMessages(lang) {
+      const nameError = document.getElementById('nameError');
+      const phoneError = document.getElementById('phoneError');
+      const emailError = document.getElementById('emailError');
+      const messageError = document.getElementById('messageError');
+      nameError.textContent = translations[lang]['form-name-error'];
+      phoneError.textContent = translations[lang]['form-phone-error'];
+      emailError.textContent = translations[lang]['form-email-error'];
+      messageError.textContent = translations[lang]['form-message-error'];
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'sv';
+      switchLanguage(savedLang);
+
+      const nameInput = document.getElementById('name');
+      const phoneInput = document.getElementById('phone');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
+
+      nameInput.addEventListener('input', () => {
+        document.getElementById('nameError').style.display = nameInput.value.match(/[A-Za-z ]{2,}/) ? 'none' : 'block';
+      });
+
+      phoneInput.addEventListener('input', () => {
+        document.getElementById('phoneError').style.display = phoneInput.value.trim() === '' || phoneInput.value.match(/^\+?\d{7,15}$/) ? 'none' : 'block';
+      });
+
+      emailInput.addEventListener('input', () => {
+        document.getElementById('emailError').style.display = emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) ? 'none' : 'block';
+      });
+
+      messageInput.addEventListener('input', () => {
+        document.getElementById('messageError').style.display = messageInput.value.trim() ? 'none' : 'block';
+      });
+
+      document.getElementById('contactForm').addEventListener('submit', function(event) {
+        let isValid = true;
+        if (!nameInput.value.match(/[A-Za-z ]{2,}/)) {
+          document.getElementById('nameError').style.display = 'block';
+          isValid = false;
+        }
+        if (phoneInput.value.trim() && !phoneInput.value.match(/^\+?\d{7,15}$/)) {
+          document.getElementById('phoneError').style.display = 'block';
+          isValid = false;
+        }
+        if (!emailInput.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
+          document.getElementById('emailError').style.display = 'block';
+          isValid = false;
+        }
+        if (!messageInput.value.trim()) {
+          document.getElementById('messageError').style.display = 'block';
+          isValid = false;
+        }
+        if (!isValid) {
+          event.preventDefault();
+        }
+      });
     });
   </script>
 </body>

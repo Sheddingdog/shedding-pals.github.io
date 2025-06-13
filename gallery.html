@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery</title>
+  <title data-key="site-title">Galleri</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="alternate" hreflang="en" href="/gallery.html?lang=en">
+  <link rel="alternate" hreflang="sv" href="/gallery.html?lang=sv">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -21,6 +23,7 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
     }
     .navbar ul {
       list-style-type: none;
@@ -51,6 +54,33 @@
     }
     .navbar .highlight:hover {
       background-color: #D55A3F;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: #FFFFFF;
+      color: #4A7043;
+      border: 1px solid #4A7043;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .lang-switcher:hover {
+      background-color: #A8C3A7;
+      color: white;
+    }
+    .lang-switcher:focus {
+      outline: 2px solid #E07A5F;
+      outline-offset: 2px;
     }
     .container {
       max-width: 1000px;
@@ -144,35 +174,91 @@
       .navbar li { margin: 0 10px; }
       .navbar a { font-size: 14px; }
       header::before, .card::before { font-size: 20px; }
+      .lang-switcher { right: 10px; width: 36px; height: 36px; font-size: 12px; }
     }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <ul>
-      <li><a href="/about.html">About Us</a></li>
-      <li><a href="/services.html">Services & Price</a></li>
-      <li><a href="/gallery.html">Gallery</a></li>
-      <li><a href="/contact.html">Contact Us</a></li>
-      <li><a href="/booking.html" class="highlight">Book a Place Now!</a></li>
+      <li><a href="/about.html" data-key="nav-about">Om oss</a></li>
+      <li><a href="/services.html" data-key="nav-services">Tjänster & Pris</a></li>
+      <li><a href="/gallery.html" data-key="nav-gallery">Galleri</a></li>
+      <li><a href="/contact.html" data-key="nav-contact">Kontakta oss</a></li>
+      <li><a href="/booking.html" class="highlight" data-key="nav-booking">Boka en plats nu!</a></li>
     </ul>
+    <button class="lang-switcher" onclick="switchLanguage('en')" data-key="lang-switch" aria-label="Byt till engelska" aria-current="false" tabindex="0">🌐 EN</button>
   </nav>
   <div class="container">
     <header>
-      <h1>Gallery</h1>
+      <h1 data-key="gallery-title">Galleri</h1>
     </header>
     <section class="content-section">
       <div class="card">
-        <h3>Pet Moments</h3>
-        <p>Explore photos of our furry friends enjoying their time with us. More coming soon!</p>
+        <h3 data-key="moments-title">Husdjursögonblick</h3>
+        <p data-key="moments-text">Utforska bilder av våra fyrbenta vänner som njuter av sin tid hos oss. Mer kommer snart!</p>
       </div>
       <div class="card contact">
-        <h3>Get in Touch</h3>
-        <p>Want to share your pet’s photos or see more? Contact us!</p>
-        <a href="/contact.html" class="card-button">Contact Us</a>
+        <h3 data-key="contact-title">Kontakta oss</h3>
+        <p data-key="contact-text">Vill du dela bilder på ditt husdjur eller se mer? Kontakta oss!</p>
+        <a href="/contact.html" class="card-button" data-key="nav-contact">Kontakta oss</a>
       </div>
     </section>
-    <a href="/index.html" class="back-button">Back to Home</a>
+    <a href="/index.html" class="back-button" data-key="back-home">Tillbaka till startsidan</a>
   </div>
+  <script>
+    const translations = {
+      sv: {
+        'site-title': 'Galleri',
+        'nav-about': 'Om oss',
+        'nav-services': 'Tjänster & Pris',
+        'nav-gallery': 'Galleri',
+        'nav-contact': 'Kontakta oss',
+        'nav-booking': 'Boka en plats nu!',
+        'lang-switch': '🌐 EN',
+        'gallery-title': 'Galleri',
+        'moments-title': 'Husdjursögonblick',
+        'moments-text': 'Utforska bilder av våra fyrbenta vänner som njuter av sin tid hos oss. Mer kommer snart!',
+        'contact-title': 'Kontakta oss',
+        'contact-text': 'Vill du dela bilder på ditt husdjur eller se mer? Kontakta oss!',
+        'back-home': 'Tillbaka till startsidan'
+      },
+      en: {
+        'site-title': 'Gallery',
+        'nav-about': 'About Us',
+        'nav-services': 'Services & Price',
+        'nav-gallery': 'Gallery',
+        'nav-contact': 'Contact Us',
+        'nav-booking': 'Book a Place Now!',
+        'lang-switch': '🌐 SV',
+        'gallery-title': 'Gallery',
+        'moments-title': 'Pet Moments',
+        'moments-text': 'Explore photos of our furry friends enjoying their time with us. More coming soon!',
+        'contact-title': 'Get in Touch',
+        'contact-text': 'Want to share your pet’s photos or see more? Contact us!',
+        'back-home': 'Back to Home'
+      }
+    };
+
+    function switchLanguage(lang) {
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        element.textContent = translations[lang][key];
+        if (element.classList.contains('lang-switcher')) {
+          element.setAttribute('aria-label', lang === 'sv' ? 'Byt till engelska' : 'Switch to Swedish');
+          element.setAttribute('aria-current', lang === 'sv' ? 'false' : 'true');
+          element.onclick = () => switchLanguage(lang === 'sv' ? 'en' : 'sv');
+        }
+      });
+      document.querySelector('title').textContent = translations[lang]['site-title'];
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'sv';
+      switchLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>

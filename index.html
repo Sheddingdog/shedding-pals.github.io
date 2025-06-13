@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Our Pet-Friendly Website</title>
+  <title data-key="site-title">Välkommen till vår husdjursvänliga värld</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="alternate" hreflang="en" href="/index.html?lang=en">
+  <link rel="alternate" hreflang="sv" href="/index.html?lang=sv">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -21,6 +23,7 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative; /* Contain absolute lang-switcher */
     }
     .navbar ul {
       list-style-type: none;
@@ -51,6 +54,33 @@
     }
     .navbar .highlight:hover {
       background-color: #D55A3F;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: #FFFFFF;
+      color: #4A7043;
+      border: 1px solid #4A7043;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .lang-switcher:hover {
+      background-color: #A8C3A7;
+      color: white;
+    }
+    .lang-switcher:focus {
+      outline: 2px solid #E07A5F;
+      outline-offset: 2px;
     }
     .hero {
       background: linear-gradient(135deg, rgba(74, 112, 67, 0.9), rgba(168, 195, 167, 0.9)), url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIElEQVQYV2NkYGD4z4ABMIIJqQJAMgUHYEALBgZgYJABAEoFAyIuG7wAAAAASUVORK5CYII=');
@@ -171,34 +201,90 @@
       .navbar li { margin: 0 10px; }
       .navbar a { font-size: 14px; }
       .card::before { font-size: 20px; }
+      .lang-switcher { right: 10px; width: 36px; height: 36px; font-size: 12px; }
     }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <ul>
-      <li><a href="/about.html">About Us</a></li>
-      <li><a href="/services.html">Services & Price</a></li>
-      <li><a href="/gallery.html">Gallery</a></li>
-      <li><a href="/contact.html">Contact Us</a></li>
-      <li><a href="/booking.html" class="highlight">Book a Place Now!</a></li>
+      <li><a href="/about.html" data-key="nav-about">Om oss</a></li>
+      <li><a href="/services.html" data-key="nav-services">Tjänster & Pris</a></li>
+      <li><a href="/gallery.html" data-key="nav-gallery">Galleri</a></li>
+      <li><a href="/contact.html" data-key="nav-contact">Kontakta oss</a></li>
+      <li><a href="/booking.html" class="highlight" data-key="nav-booking">Boka en plats nu!</a></li>
     </ul>
+    <button class="lang-switcher" onclick="switchLanguage('en')" data-key="lang-switch" aria-label="Byt till engelska" aria-current="false" tabindex="0">🌐 EN</button>
   </nav>
   <div class="hero">
-    <h1>Welcome to Our Pet-Friendly World</h1>
-    <p>Bring your furry friends and explore a cozy, pet-loving experience inspired by Sweden’s nature!</p>
-    <a href="/booking.html" class="cta-button">Book a Place Now!</a>
+    <h1 data-key="welcome-title">Välkommen till vår husdjursvänliga värld</h1>
+    <p data-key="welcome-text">Ta med dina fyrbenta vänner och utforska en mysig, husdjursälskande upplevelse inspirerad av Sveriges natur!</p>
+    <a href="/booking.html" class="cta-button" data-key="nav-booking">Boka en plats nu!</a>
   </div>
   <div class="content-section">
     <div class="card mission">
-      <h3>Our Mission</h3>
-      <p>We are dedicated to providing you and your pets with the best experience possible, tailored to your needs.</p>
+      <h3 data-key="mission-title">Vårt uppdrag</h3>
+      <p data-key="mission-text">Vi är dedikerade till att ge dig och dina husdjur den bästa möjliga upplevelsen, skräddarsydd efter era behov.</p>
     </div>
     <div class="card contact">
-      <h3>Get in Touch</h3>
-      <p>Have a question or want to connect? Reach out through our contact form!</p>
-      <a href="/contact.html" class="card-button">Contact Us</a>
+      <h3 data-key="contact-title">Kontakta oss</h3>
+      <p data-key="contact-text">Har du en fråga eller vill du kontakta oss? Nå oss via vårt kontaktformulär!</p>
+      <a href="/contact.html" class="card-button" data-key="nav-contact">Kontakta oss</a>
     </div>
   </div>
+  <script>
+    const translations = {
+      sv: {
+        'site-title': 'Välkommen till vår husdjursvänliga värld',
+        'nav-about': 'Om oss',
+        'nav-services': 'Tjänster & Pris',
+        'nav-gallery': 'Galleri',
+        'nav-contact': 'Kontakta oss',
+        'nav-booking': 'Boka en plats nu!',
+        'lang-switch': '🌐 EN',
+        'welcome-title': 'Välkommen till vår husdjursvänliga värld',
+        'welcome-text': 'Ta med dina fyrbenta vänner och utforska en mysig, husdjursälskande upplevelse inspirerad av Sveriges natur!',
+        'mission-title': 'Vårt uppdrag',
+        'mission-text': 'Vi är dedikerade till att ge dig och dina husdjur den bästa möjliga upplevelsen, skräddarsydd efter era behov.',
+        'contact-title': 'Kontakta oss',
+        'contact-text': 'Har du en fråga eller vill du kontakta oss? Nå oss via vårt kontaktformulär!'
+      },
+      en: {
+        'site-title': 'Welcome to Our Pet-Friendly World',
+        'nav-about': 'About Us',
+        'nav-services': 'Services & Price',
+        'nav-gallery': 'Gallery',
+        'nav-contact': 'Contact Us',
+        'nav-booking': 'Book a Place Now!',
+        'lang-switch': '🌐 SV',
+        'welcome-title': 'Welcome to Our Pet-Friendly World',
+        'welcome-text': 'Bring your furry friends and explore a cozy, pet-loving experience inspired by Sweden’s nature!',
+        'mission-title': 'Our Mission',
+        'mission-text': 'We are dedicated to providing you and your pets with the best experience possible, tailored to your needs.',
+        'contact-title': 'Get in Touch',
+        'contact-text': 'Have a question or want to connect? Reach out through our contact form!'
+      }
+    };
+
+    function switchLanguage(lang) {
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        element.textContent = translations[lang][key];
+        if (element.classList.contains('lang-switcher')) {
+          element.setAttribute('aria-label', lang === 'sv' ? 'Byt till engelska' : 'Switch to Swedish');
+          element.setAttribute('aria-current', lang === 'sv' ? 'false' : 'true');
+          element.onclick = () => switchLanguage(lang === 'sv' ? 'en' : 'sv');
+        }
+      });
+      document.querySelector('title').textContent = translations[lang]['site-title'];
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'sv';
+      switchLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
