@@ -1,290 +1,47 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-key="site-title">Välkommen till vår husdjursvänliga värld</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="alternate" hreflang="en" href="/index.html?lang=en">
-  <link rel="alternate" hreflang="sv" href="/index.html?lang=sv">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #F8F1E9;
-      color: #333;
-    }
-    .navbar {
-      background-color: rgba(74, 112, 67, 0.95);
-      padding: 20px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: relative; /* Contain absolute lang-switcher */
-    }
-    .navbar ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .navbar li {
-      display: inline-block;
-      margin: 0 20px;
-    }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-    .navbar a:hover {
-      color: #F8F1E9;
-    }
-    .navbar .highlight {
-      background-color: #E07A5F;
-      padding: 8px 12px;
-      border-radius: 4px;
-      color: white;
-      transition: background-color 0.3s ease;
-    }
-    .navbar .highlight:hover {
-      background-color: #D55A3F;
-    }
-    .lang-switcher {
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: #FFFFFF;
-      color: #4A7043;
-      border: 1px solid #4A7043;
-      border-radius: 50%;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .lang-switcher:hover {
-      background-color: #A8C3A7;
-      color: white;
-    }
-    .lang-switcher:focus {
-      outline: 2px solid #E07A5F;
-      outline-offset: 2px;
-    }
-    .hero {
-      background: linear-gradient(135deg, rgba(74, 112, 67, 0.9), rgba(168, 195, 167, 0.9)), url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIElEQVQYV2NkYGD4z4ABMIIJqQJAMgUHYEALBgZgYJABAEoFAyIuG7wAAAAASUVORK5CYII=');
-      color: white;
-      padding: 100px 20px;
-      text-align: center;
-      min-height: 50vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-top: 80px;
-    }
-    .hero h1 {
-      font-size: 48px;
-      margin: 0;
-      font-weight: 600;
-      animation: fadeInDown 1s ease-in-out;
-    }
-    .hero p {
-      font-size: 20px;
-      margin: 20px 0;
-      max-width: 600px;
-      animation: fadeInUp 1s ease-in-out 0.3s;
-      animation-fill-mode: backwards;
-    }
-    .cta-button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #E07A5F;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 25px;
-      font-size: 14px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, background-color 0.3s ease;
-      animation: fadeInUp 1s ease-in-out 0.6s;
-      animation-fill-mode: backwards;
-      margin: 0 auto;
-    }
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 8px rgba(224, 122, 95, 0.5);
-      filter: drop-shadow(0 0 12px rgba(224, 122, 95, 0.7));
-      background-color: #D55A3F;
-    }
-    .content-section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border: 1px solid #e0e0e0;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .card.mission::before {
-      content: '🐶';
-      display: block;
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #4A7043;
-    }
-    .card.contact::before {
-      content: '🐾';
-      display: block;
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #4A7043;
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      color: #4A7043;
-      font-weight: 600;
-    }
-    .card p {
-      line-height: 1.6;
-      color: #555;
-    }
-    .card-button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #E07A5F;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-    .card-button:hover {
-      background-color: #D55A3F;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 32px; }
-      .hero p { font-size: 16px; }
-      .cta-button { padding: 8px 16px; font-size: 14px; margin: 0 auto; }
-      .navbar li { margin: 0 10px; }
-      .navbar a { font-size: 14px; }
-      .card::before { font-size: 20px; }
-      .lang-switcher { right: 10px; width: 36px; height: 36px; font-size: 12px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Välkommen</title>
+    <style>
+        body { background-color: #4A7C7C; color: #FFFFFF; font-family: Georgia, serif; margin: 0; padding: 0; text-align: center; }
+        header { background: url('feather-pattern.png') repeat-x bottom #8B4513; padding: 20px; }
+        .logo { max-width: 200px; height: auto; }
+        nav a { color: #FFFFFF; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #A9A9A9; }
+        .content { max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        h1, h2 { font-family: "Dancing Script", cursive; color: #8B4513; }
+        button { background-color: #8B4513; color: #FFFFFF; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #A9A9A9; }
+        .language { position: absolute; top: 10px; right: 10px; }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <ul>
-      <li><a href="/about.html" data-key="nav-about">Om oss</a></li>
-      <li><a href="/services.html" data-key="nav-services">Tjänster & Pris</a></li>
-      <li><a href="/gallery.html" data-key="nav-gallery">Galleri</a></li>
-      <li><a href="/contact.html" data-key="nav-contact">Kontakta oss</a></li>
-      <li><a href="/booking.html" class="highlight" data-key="nav-booking">Boka en plats nu!</a></li>
-    </ul>
-    <button class="lang-switcher" onclick="switchLanguage('en')" data-key="lang-switch" aria-label="Byt till engelska" aria-current="false" tabindex="0">🌐 EN</button>
-  </nav>
-  <div class="hero">
-    <h1 data-key="welcome-title">Välkommen till vår husdjursvänliga värld</h1>
-    <p data-key="welcome-text">Ta med dina fyrbenta vänner och utforska en mysig, husdjursälskande upplevelse inspirerad av Sveriges natur!</p>
-    <a href="/booking.html" class="cta-button" data-key="nav-booking">Boka en plats nu!</a>
-  </div>
-  <div class="content-section">
-    <div class="card mission">
-      <h3 data-key="mission-title">Vårt uppdrag</h3>
-      <p data-key="mission-text">Vi är dedikerade till att ge dig och dina husdjur den bästa möjliga upplevelsen, skräddarsydd efter era behov.</p>
+    <header>
+        <a href="index.html"><img src="wolf-logo.png" alt="Logo" class="logo"></a>
+        <nav>
+            <a href="about.html">Om oss</a>
+            <a href="services.html">Tjänster & Pris</a>
+            <a href="gallery.html">Galleri</a>
+            <a href="contact.html">Kontakta oss</a>
+            <a href="booking.html">Boka en plats nu!</a>
+        </nav>
+        <div class="language">🌐 <a href="#">EN</a></div>
+    </header>
+    <div class="content">
+        <h1>Välkommen till vår husdjursvänliga värld</h1>
+        <p>Ta med dina fyrbenta vänner och utforska en mysig, husdjursälskande upplevelse inspirerad av Sveriges natur!</p>
+        <a href="booking.html"><button>Boka en plats nu!</button></a>
+        <section>
+            <h2>Vårt uppdrag</h2>
+            <p>Vi är dedikerade till att ge dig och dina husdjur den bästa möjliga upplevelsen, skräddarsydd efter era behov.</p>
+        </section>
+        <section>
+            <h2>Kontakta oss</h2>
+            <p>Har du en fråga eller vill du kontakta oss? Nå oss via vårt kontaktformulär!</p>
+            <a href="contact.html"><button>Kontakta oss</button></a>
+        </section>
     </div>
-    <div class="card contact">
-      <h3 data-key="contact-title">Kontakta oss</h3>
-      <p data-key="contact-text">Har du en fråga eller vill du kontakta oss? Nå oss via vårt kontaktformulär!</p>
-      <a href="/contact.html" class="card-button" data-key="nav-contact">Kontakta oss</a>
-    </div>
-  </div>
-  <script>
-    const translations = {
-      sv: {
-        'site-title': 'Välkommen till vår husdjursvänliga värld',
-        'nav-about': 'Om oss',
-        'nav-services': 'Tjänster & Pris',
-        'nav-gallery': 'Galleri',
-        'nav-contact': 'Kontakta oss',
-        'nav-booking': 'Boka en plats nu!',
-        'lang-switch': '🌐 EN',
-        'welcome-title': 'Välkommen till vår husdjursvänliga värld',
-        'welcome-text': 'Ta med dina fyrbenta vänner och utforska en mysig, husdjursälskande upplevelse inspirerad av Sveriges natur!',
-        'mission-title': 'Vårt uppdrag',
-        'mission-text': 'Vi är dedikerade till att ge dig och dina husdjur den bästa möjliga upplevelsen, skräddarsydd efter era behov.',
-        'contact-title': 'Kontakta oss',
-        'contact-text': 'Har du en fråga eller vill du kontakta oss? Nå oss via vårt kontaktformulär!'
-      },
-      en: {
-        'site-title': 'Welcome to Our Pet-Friendly World',
-        'nav-about': 'About Us',
-        'nav-services': 'Services & Price',
-        'nav-gallery': 'Gallery',
-        'nav-contact': 'Contact Us',
-        'nav-booking': 'Book a Place Now!',
-        'lang-switch': '🌐 SV',
-        'welcome-title': 'Welcome to Our Pet-Friendly World',
-        'welcome-text': 'Bring your furry friends and explore a cozy, pet-loving experience inspired by Sweden’s nature!',
-        'mission-title': 'Our Mission',
-        'mission-text': 'We are dedicated to providing you and your pets with the best experience possible, tailored to your needs.',
-        'contact-title': 'Get in Touch',
-        'contact-text': 'Have a question or want to connect? Reach out through our contact form!'
-      }
-    };
-
-    function switchLanguage(lang) {
-      localStorage.setItem('language', lang);
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        element.textContent = translations[lang][key];
-        if (element.classList.contains('lang-switcher')) {
-          element.setAttribute('aria-label', lang === 'sv' ? 'Byt till engelska' : 'Switch to Swedish');
-          element.setAttribute('aria-current', lang === 'sv' ? 'false' : 'true');
-          element.onclick = () => switchLanguage(lang === 'sv' ? 'en' : 'sv');
-        }
-      });
-      document.querySelector('title').textContent = translations[lang]['site-title'];
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('language') || 'sv';
-      switchLanguage(savedLang);
-    });
-  </script>
 </body>
 </html>

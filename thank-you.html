@@ -1,203 +1,38 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-key="site-title">Tack</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="alternate" hreflang="en" href="/thank-you.html?lang=en">
-  <link rel="alternate" hreflang="sv" href="/thank-you.html?lang=sv">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #F8F1E9;
-      color: #333;
-    }
-    .navbar {
-      background-color: rgba(74, 112, 67, 0.95);
-      padding: 20px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: relative;
-    }
-    .navbar ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .navbar li {
-      display: inline-block;
-      margin: 0 20px;
-    }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-    .navbar a:hover {
-      color: #F8F1E9;
-    }
-    .navbar .highlight {
-      background-color: #E07A5F;
-      padding: 8px 12px;
-      border-radius: 4px;
-      color: white;
-      transition: background-color 0.3s ease;
-    }
-    .navbar .highlight:hover {
-      background-color: #D55A3F;
-    }
-    .lang-switcher {
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: #FFFFFF;
-      color: #4A7043;
-      border: 1px solid #4A7043;
-      border-radius: 50%;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .lang-switcher:hover {
-      background-color: #A8C3A7;
-      color: white;
-    }
-    .lang-switcher:focus {
-      outline: 2px solid #E07A5F;
-      outline-offset: 2px;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 80px auto 0;
-      padding: 20px;
-      text-align: center;
-    }
-    .thank-you-container {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border: 1px solid #e0e0e0;
-      max-width: 600px;
-      margin: 20px auto;
-      text-align: center;
-    }
-    .thank-you-container h1 {
-      margin: 0 0 10px;
-      color: #4A7043;
-      font-weight: 600;
-      font-size: 32px;
-    }
-    .thank-you-container p {
-      line-height: 1.6;
-      color: #555;
-      font-size: 16px;
-      margin: 10px 0;
-    }
-    .back-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #E07A5F;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-    .back-button:hover {
-      background-color: #D55A3F;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 24px; }
-      .navbar li { margin: 0 10px; }
-      .navbar a { font-size: 14px; }
-      .lang-switcher { right: 10px; width: 36px; height: 36px; font-size: 12px; }
-      .thank-you-container { max-width: 100%; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tack</title>
+    <style>
+        body { background-color: #4A7C7C; color: #FFFFFF; font-family: Georgia, serif; margin: 0; padding: 0; text-align: center; }
+        header { background: url('feather-pattern.png') repeat-x bottom #8B4513; padding: 20px; }
+        .logo { max-width: 200px; height: auto; }
+        nav a { color: #FFFFFF; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #A9A9A9; }
+        .content { max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        h1 { font-family: "Dancing Script", cursive; color: #8B4513; }
+        button { background-color: #8B4513; color: #FFFFFF; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #A9A9A9; }
+        .language { position: absolute; top: 10px; right: 10px; }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <ul>
-      <li><a href="/about.html" data-key="nav-about">Om oss</a></li>
-      <li><a href="/services.html" data-key="nav-services">Tjänster & Pris</a></li>
-      <li><a href="/gallery.html" data-key="nav-gallery">Galleri</a></li>
-      <li><a href="/contact.html" data-key="nav-contact">Kontakta oss</a></li>
-      <li><a href="/booking.html" class="highlight" data-key="nav-booking">Boka en plats nu!</a></li>
-    </ul>
-    <button class="lang-switcher" onclick="switchLanguage('en')" data-key="lang-switch" aria-label="Byt till engelska" aria-current="false" tabindex="0">🌐 EN</button>
-  </nav>
-  <div class="container">
-    <div class="thank-you-container">
-      <h1 data-key="thank-you-title">Tack!</h1>
-      <p data-key="thank-you-text">Ditt meddelande har skickats. Vi återkommer snart.</p>
-      <a href="/index.html" class="back-button" data-key="back-home">Tillbaka till startsidan</a>
+    <header>
+        <a href="index.html"><img src="wolf-logo.png" alt="Logo" class="logo"></a>
+        <nav>
+            <a href="about.html">Om oss</a>
+            <a href="services.html">Tjänster & Pris</a>
+            <a href="gallery.html">Galleri</a>
+            <a href="contact.html">Kontakta oss</a>
+            <a href="booking.html">Boka en plats nu!</a>
+        </nav>
+        <div class="language">🌐 <a href="#">EN</a></div>
+    </header>
+    <div class="content">
+        <h1>Tack!</h1>
+        <p>Ditt meddelande har skickats. Vi återkommer snart.</p>
+        <a href="index.html"><button>Tillbaka till startsidan</button></a>
     </div>
-  </div>
-  <script>
-    const translations = {
-      sv: {
-        'site-title': 'Tack',
-        'nav-about': 'Om oss',
-        'nav-services': 'Tjänster & Pris',
-        'nav-gallery': 'Galleri',
-        'nav-contact': 'Kontakta oss',
-        'nav-booking': 'Boka en plats nu!',
-        'lang-switch': '🌐 EN',
-        'thank-you-title': 'Tack!',
-        'thank-you-text': 'Ditt meddelande har skickats. Vi återkommer snart.',
-        'back-home': 'Tillbaka till startsidan'
-      },
-      en: {
-        'site-title': 'Thank You',
-        'nav-about': 'About Us',
-        'nav-services': 'Services & Price',
-        'nav-gallery': 'Gallery',
-        'nav-contact': 'Contact Us',
-        'nav-booking': 'Book a Place Now!',
-        'lang-switch': '🌐 SV',
-        'thank-you-title': 'Thank You!',
-        'thank-you-text': 'Your message has been successfully submitted. We\'ll get back to you soon.',
-        'back-home': 'Back to Home'
-      }
-    };
-
-    function switchLanguage(lang) {
-      localStorage.setItem('language', lang);
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        element.textContent = translations[lang][key];
-        if (element.classList.contains('lang-switcher')) {
-          element.setAttribute('aria-label', lang === 'sv' ? 'Byt till engelska' : 'Switch to Swedish');
-          element.setAttribute('aria-current', lang === 'sv' ? 'false' : 'true');
-          element.onclick = () => switchLanguage(lang === 'sv' ? 'en' : 'sv');
-        }
-      });
-      document.querySelector('title').textContent = translations[lang]['site-title'];
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('language') || 'sv';
-      switchLanguage(savedLang);
-    });
-  </script>
 </body>
 </html>
