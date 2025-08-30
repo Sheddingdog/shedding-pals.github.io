@@ -69,11 +69,11 @@
     <div class="content">
         <h2>Kontakta oss</h2>
         <p>Vi vill gärna höra från dig och dina husdjur! Kontakta oss med frågor eller funderingar.</p>
-        <form>
-            <input type="text" placeholder="Namn" required><br>
-            <input type="tel" placeholder="Telefon" required><br>
-            <input type="email" placeholder="E-post" required><br>
-            <textarea placeholder="Meddelande"></textarea><br>
+        <form name="contact-form" netlify data-netlify="true" action="/thank-you.html" method="POST">
+            <input type="text" name="name" placeholder="Namn" required><br>
+            <input type="tel" name="phone" placeholder="Telefon" required><br>
+            <input type="email" name="email" placeholder="E-post" required><br>
+            <textarea name="message" placeholder="Meddelande"></textarea><br>
             <button type="submit">Skicka</button>
         </form>
         <p>E-post: info@ourwebsite.com</p>
