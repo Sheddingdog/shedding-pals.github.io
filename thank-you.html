@@ -3,36 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tack</title>
+    <title>Tack!</title>
     <style>
-        body { background-color: #4A7C7C; color: #FFFFFF; font-family: Georgia, serif; margin: 0; padding: 0; text-align: center; }
-        header { background: url('feather-pattern.png') repeat-x bottom #8B4513; padding: 20px; }
-        .logo { max-width: 200px; height: auto; }
-        nav a { color: #FFFFFF; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        nav a:hover { color: #A9A9A9; }
-        .content { max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        h1 { font-family: "Dancing Script", cursive; color: #8B4513; }
-        button { background-color: #8B4513; color: #FFFFFF; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #A9A9A9; }
-        .language { position: absolute; top: 10px; right: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E0E0E0;
+        }
+        .header {
+            background-color: #6B8E8E;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .header a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .logo {
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            width: 150px;
+            margin-top: 20px;
+        }
+        .back-link {
+            position: absolute;
+            top: 280px;
+            left: 20px;
+        }
+        .back-link a {
+            color: #6B8E8E;
+            text-decoration: none;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+            margin-top: 250px;
+        }
+        .content h2 {
+            color: #6B8E8E;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
-        <nav>
-            <a href="about.html">Om oss</a>
-            <a href="services.html">Tjänster & Pris</a>
-            <a href="gallery.html">Galleri</a>
-            <a href="contact.html">Kontakta oss</a>
-            <a href="booking.html">Boka en plats nu!</a>
-        </nav>
-        <div class="language">🌐 <a href="#">EN</a></div>
-    </header>
+    <div class="header">
+        <a href="index.html">Om oss</a>
+        <a href="services.html">Tjänster & Pris</a>
+        <a href="gallery.html">Galleri</a>
+        <a href="contact.html">Kontakta oss</a>
+        <a href="booking.html">Boka en plats nu!</a>
+    </div>
+    <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+    <div class="back-link"><a href="index.html">Tillbaka till startsidan</a></div>
     <div class="content">
-        <h1>Tack!</h1>
+        <h2>Tack!</h2>
         <p>Ditt meddelande har skickats. Vi återkommer snart.</p>
-        <a href="index.html"><button>Tillbaka till startsidan</button></a>
     </div>
 </body>
 </html>
