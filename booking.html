@@ -45,6 +45,11 @@
         .content h2 {
             color: #6B8E8E;
         }
+        .content label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
         .content input, .content select, .content textarea {
             display: block;
             margin: 10px auto;
@@ -69,22 +74,30 @@
     <div class="content">
         <h2>Boka en plats nu!</h2>
         <form name="booking-form" netlify data-netlify="true" action="/thank-you.html" method="POST">
-            <input type="text" name="name" placeholder="Namn" required><br>
-            <input type="tel" name="phone" placeholder="Telefon" required><br>
-            <input type="email" name="email" placeholder="E-post" required><br>
-            <input type="date" name="dropoff-date" placeholder="Lämningsdatum" required><br>
-            <select name="dropoff-time" required>
+            <label for="name">Namn:</label>
+            <input type="text" id="name" name="name" placeholder="Namn" required><br>
+            <label for="phone">Telefon:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Telefon" required><br>
+            <label for="email">E-post:</label>
+            <input type="email" id="email" name="email" placeholder="E-post" required><br>
+            <label for="dropoff-date">Lämningsdatum:</label>
+            <input type="date" id="dropoff-date" name="dropoff-date" placeholder="Lämningsdatum" required><br>
+            <label for="dropoff-time">Lämningstid:</label>
+            <select id="dropoff-time" name="dropoff-time" required>
                 <option disabled selected>Vänligen välj en tid.</option>
                 <option>Morgon</option>
                 <option>Kväll</option>
             </select><br>
-            <input type="date" name="pickup-date" placeholder="Hämtningsdatum" required><br>
-            <select name="pickup-time" required>
+            <label for="pickup-date">Hämtningsdatum:</label>
+            <input type="date" id="pickup-date" name="pickup-date" placeholder="Hämtningsdatum" required><br>
+            <label for="pickup-time">Hämtningstid:</label>
+            <select id="pickup-time" name="pickup-time" required>
                 <option disabled selected>Vänligen välj en tid.</option>
                 <option>Morgon</option>
                 <option>Kväll</option>
             </select><br>
-            <textarea name="message" placeholder="Meddelande"></textarea><br>
+            <label for="message">Meddelande:</label>
+            <textarea id="message" name="message" placeholder="Meddelande"></textarea><br>
             <button type="submit">Boka nu</button>
         </form>
         <p>Vänligen kontakta oss för att bekräfta tillgänglighet och slutföra din bokning.</p>
