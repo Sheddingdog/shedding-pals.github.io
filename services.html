@@ -41,6 +41,42 @@
             margin: 20px auto 0 auto;
             width: 200px;
         }
+        .pricing-table {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .pricingIVATE-table h3 {
+            color: #657F6D;
+            margin-bottom: 15px;
+        }
+        .pricing-item {
+            margin: 15px 0;
+            padding: 10px;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .pricing-item:last-child {
+            border-bottom: none;
+        }
+        .pricing-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .pricing-item span {
+            font-weight: bold;
+            color: #657F6D;
+        }
+        .pricing-item-text {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +93,32 @@
     <div class="content">
         <h2>Tjänster & Pris</h2>
         <h3>Våra erbjudanden</h3>
-        <p>Utforska våra husdjursvänliga tjänster, inklusive promenader, grooming och boende, från 999 kr/månad.</p>
+        <p>Vi erbjuder professionell hunddagis och övernattning för ditt husdjur, med flexibla och prisvärda alternativ.</p>
+       
+        <div class="pricing-table">
+            <h3>Priser för hunddagis och övernattning</h3>
+            <div class="pricing-item">
+                <img src="daycare.png" alt="Hunddagis">
+                <div class="pricing-item-text">
+                    <p>Hunddagis (dag): <span>210 kr/dag</span></p>
+                    <p>Gäller även helger och helgdagar.</p>
+                </div>
+            </div>
+            <div class="pricing-item">
+                <img src="overnight.png" alt="Övernattning">
+                <div class="pricing-item-text">
+                    <p>Övernattning (natt): <span>295 kr/natt</span></p>
+                    <p>Gäller även helger och helgdagar.</p>
+                </div>
+            </div>
+            <div class="pricing-item">
+                <img src="monthly_daycare.png" alt="Månadserbjudande">
+                <div class="pricing-item-text">
+                    <p>Månadserbjudande (hunddagis): <span>3150 kr/månad</span></p>
+                    <p>Inkluderar vardagar, helger och helgdagar.</p>
+                </div>
+            </div>
+        </div>
         <h3>Kontakta oss</h3>
         <p>Vill du veta mer om våra tjänster för dig och ditt husdjur? Kontakta oss idag!</p>
         <p><a href="contact.html">Kontakta oss</a></p>
