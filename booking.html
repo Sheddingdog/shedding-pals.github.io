@@ -15,12 +15,43 @@
             background-color: #657F6D;
             padding: 20px 0;
             text-align: center;
+            position: relative;
         }
-        .header a {
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
             color: white;
             margin: 0 20px;
             text-decoration: none;
             font-size: 24px;
+        }
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        .site-name {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 48px;
+            font-weight: bold;
+            color: #657F6D;
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+        .logo {
+            display: block;
+            margin: 20px auto 0 auto;
+            width: 200px;
         }
         .back-link {
             position: absolute;
@@ -36,95 +67,110 @@
             text-align: center;
             margin-top: 50px;
         }
-        .logo {
-            display: block;
-            margin: 20px auto 0 auto;
-            width: 200px;
+        .content h2 {
+            color: #657F6D;
         }
-        form {
-            max-width: 500px;
-            margin: 0 auto;
+        .content a {
+            color: #657F6D;
+            text-decoration: none;
         }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input[type="text"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            height: 150px;
-        }
-        input[type="submit"] {
-            background-color: #657F6D;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #506659;
-        }
-        .netlify-captcha {
+        .form-group {
             margin: 10px 0;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #657F6D;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="index.html">Hem</a>
-        <a href="about.html">Om oss</a>
-        <a href="services.html">Tjänster & Pris</a>
-        <a href="gallery.html">Galleri</a>
-        <a href="contact.html">Kontakta oss</a>
-        <a href="booking.html">Boka en plats nu!</a>
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Hem</a>
+            <a href="about.html">Om oss</a>
+            <a href="services.html">Tjänster & Pris</a>
+            <a href="gallery.html">Galleri</a>
+            <a href="contact.html">Kontakta oss</a>
+            <a href="booking.html">Boka en plats nu!</a>
+        </div>
     </div>
     <div class="back-link"><a href="index.html">Tillbaka till startsidan</a></div>
     <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+    <div class="site-name">Elins Hundmys</div>
     <div class="content">
         <h2>Boka en plats nu!</h2>
-        <form name="booking" method="POST" data-netlify="true" data-netlify-recaptcha="true">
-            <input type="hidden" name="form-name" value="booking">
-            <label for="name">Namn:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="phone">Telefon:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <label for="email">E-post:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="dropoff-date">Lämningsdatum:</label>
-            <input type="date" id="dropoff-date" name="dropoff-date" required>
-            <label for="dropoff-time">Lämningstid:</label>
-            <select id="dropoff-time" name="dropoff-time" required>
+        <div class="form-group">
+            <label>Namn:</label><br>
+            <input type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label>Telefon:</label><br>
+            <input type="tel" name="phone">
+        </div>
+        <div class="form-group">
+            <label>E-post:</label><br>
+            <input type="email" name="email">
+        </div>
+        <div class="form-group">
+            <label>Lämningsdatum:</label><br>
+            <input type="date" name="dropoff_date">
+        </div>
+        <div class="form-group">
+            <label>Lämningstid:</label><br>
+            <select name="dropoff_time">
                 <option value="">Vänligen välj en tid</option>
                 <option value="morning">Morgon</option>
                 <option value="evening">Kväll</option>
             </select>
-            <label for="pickup-date">Hämtningsdatum:</label>
-            <input type="date" id="pickup-date" name="pickup-date" required>
-            <label for="pickup-time">Hämtningsdatum:</label>
-            <select id="pickup-time" name="pickup-time" required>
+        </div>
+        <div class="form-group">
+            <label>Hämtningsdatum:</label><br>
+            <input type="date" name="pickup_date">
+        </div>
+        <div class="form-group">
+            <label>Hämtningsdatum:</label><br>
+            <select name="pickup_time">
                 <option value="">Vänligen välj en tid</option>
                 <option value="morning">Morgon</option>
                 <option value="evening">Kväll</option>
             </select>
-            <label for="message">Meddelande:</label>
-            <textarea id="message" name="message"></textarea>
-            <div data-netlify-recaptcha="true"></div>
-            <input type="submit" value="Boka nu">
-        </form>
+        </div>
+        <div class="form-group">
+            <label>Meddelande:</label><br>
+            <textarea name="message" rows="5"></textarea>
+        </div>
         <p>Vänligen kontakta oss för att bekräfta tillgänglighet och slutföra din bokning.</p>
-        <p>Ring oss på (123) 456-7890 eller e-posta <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a>.</p>
+        <p>Ring oss på <a href="tel:(123)456-7890">(123) 456-7890</a> eller e-posta <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a>.</p>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

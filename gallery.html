@@ -15,12 +15,43 @@
             background-color: #657F6D;
             padding: 20px 0;
             text-align: center;
+            position: relative;
         }
-        .header a {
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
             color: white;
             margin: 0 20px;
             text-decoration: none;
             font-size: 24px;
+        }
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        .site-name {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 48px;
+            font-weight: bold;
+            color: #657F6D;
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+        .logo {
+            display: block;
+            margin: 20px auto 0 auto;
+            width: 200px;
         }
         .back-link {
             position: absolute;
@@ -36,31 +67,64 @@
             text-align: center;
             margin-top: 50px;
         }
-        .logo {
-            display: block;
-            margin: 20px auto 0 auto;
-            width: 200px;
+        .content h2 {
+            color: #657F6D;
+        }
+        .content a {
+            color: #657F6D;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #657F6D;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="index.html">Hem</a>
-        <a href="about.html">Om oss</a>
-        <a href="services.html">Tjänster & Pris</a>
-        <a href="gallery.html">Galleri</a>
-        <a href="contact.html">Kontakta oss</a>
-        <a href="booking.html">Boka en plats nu!</a>
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Hem</a>
+            <a href="about.html">Om oss</a>
+            <a href="services.html">Tjänster & Pris</a>
+            <a href="gallery.html">Galleri</a>
+            <a href="contact.html">Kontakta oss</a>
+            <a href="booking.html">Boka en plats nu!</a>
+        </div>
     </div>
     <div class="back-link"><a href="index.html">Tillbaka till startsidan</a></div>
     <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+    <div class="site-name">Elins Hundmys</div>
     <div class="content">
         <h2>Galleri</h2>
         <h3>Husdjursögonblick</h3>
         <p>Utforska bilder av våra fyrbenta vänner som njuter av sin tid hos oss. Mer kommer snart!</p>
         <h3>Kontakta oss</h3>
         <p>Vill du dela bilder på ditt husdjur eller se mer? Kontakta oss!</p>
-        <p><a href="contact.html">Kontakta oss</a></p>
+        <a href="contact.html">Kontakta oss</a>
     </div>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

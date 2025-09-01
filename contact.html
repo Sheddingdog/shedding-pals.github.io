@@ -15,12 +15,43 @@
             background-color: #657F6D;
             padding: 20px 0;
             text-align: center;
+            position: relative;
         }
-        .header a {
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
             color: white;
             margin: 0 20px;
             text-decoration: none;
             font-size: 24px;
+        }
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        .site-name {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 48px;
+            font-weight: bold;
+            color: #657F6D;
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+        .logo {
+            display: block;
+            margin: 20px auto 0 auto;
+            width: 200px;
         }
         .back-link {
             position: absolute;
@@ -36,76 +67,84 @@
             text-align: center;
             margin-top: 50px;
         }
-        .logo {
-            display: block;
-            margin: 20px auto 0 auto;
-            width: 200px;
+        .content h2 {
+            color: #657F6D;
         }
-        form {
-            max-width: 500px;
-            margin: 0 auto;
+        .content a {
+            color: #657F6D;
+            text-decoration: none;
         }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            height: 150px;
-        }
-        input[type="submit"] {
-            background-color: #657F6D;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #506659;
-        }
-        .netlify-captcha {
+        .form-group {
             margin: 10px 0;
+        }
+        .form-group input, .form-group textarea {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #657F6D;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="index.html">Hem</a>
-        <a href="about.html">Om oss</a>
-        <a href="services.html">Tjänster & Pris</a>
-        <a href="gallery.html">Galleri</a>
-        <a href="contact.html">Kontakta oss</a>
-        <a href="booking.html">Boka en plats nu!</a>
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Hem</a>
+            <a href="about.html">Om oss</a>
+            <a href="services.html">Tjänster & Pris</a>
+            <a href="gallery.html">Galleri</a>
+            <a href="contact.html">Kontakta oss</a>
+            <a href="booking.html">Boka en plats nu!</a>
+        </div>
     </div>
     <div class="back-link"><a href="index.html">Tillbaka till startsidan</a></div>
     <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+    <div class="site-name">Elins Hundmys</div>
     <div class="content">
         <h2>Kontakta oss</h2>
         <p>Vi vill gärna höra från dig och dina husdjur! Kontakta oss med frågor eller funderingar.</p>
-        <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
-            <input type="hidden" name="form-name" value="contact">
-            <label for="name">Namn:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">E-post:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Meddelande:</label>
-            <textarea id="message" name="message" required></textarea>
-            <div data-netlify-recaptcha="true"></div>
-            <input type="submit" value="Skicka">
-        </form>
-        <p>E-post: info@elinshundmys.se</p>
+        <div class="form-group">
+            <label>Namn:</label><br>
+            <input type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label>E-post:</label><br>
+            <input type="email" name="email">
+        </div>
+        <div class="form-group">
+            <label>Meddelande:</label><br>
+            <textarea name="message" rows="5"></textarea>
+        </div>
+        <p>E-post: <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a></p>
         <p>Telefon: (123) 456-7890</p>
         <p>Adress: Huvudgatan 123, Stad, Land</p>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
