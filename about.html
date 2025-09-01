@@ -15,12 +15,29 @@
             background-color: #657F6D;
             padding: 20px 0;
             text-align: center;
+            position: relative;
         }
-        .header a {
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
             color: white;
             margin: 0 20px;
             text-decoration: none;
             font-size: 24px;
+        }
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
         .site-name {
             text-align: center;
@@ -56,16 +73,40 @@
             color: #657F6D;
             text-decoration: none;
         }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #657F6D;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="index.html">Hem</a>
-        <a href="about.html">Om oss</a>
-        <a href="services.html">Tjänster & Pris</a>
-        <a href="gallery.html">Galleri</a>
-        <a href="contact.html">Kontakta oss</a>
-        <a href="booking.html">Boka en plats nu!</a>
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Hem</a>
+            <a href="about.html">Om oss</a>
+            <a href="services.html">Tjänster & Pris</a>
+            <a href="gallery.html">Galleri</a>
+            <a href="contact.html">Kontakta oss</a>
+            <a href="booking.html">Boka en plats nu!</a>
+        </div>
     </div>
     <div class="back-link"><a href="index.html">Tillbaka till startsidan</a></div>
     <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
@@ -78,5 +119,11 @@
         <p>Har du en fråga eller vill du kontakta oss? Nå oss via vårt kontaktformulär!</p>
         <a href="contact.html">Kontakta oss</a>
     </div>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
