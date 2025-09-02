@@ -140,7 +140,7 @@
         </div>
         <div class="form-group">
             <label>Lämningsdatum:</label><br>
-            <input type="date" name="dropoff_date">
+            <input type="date" name="dropoff_date" id="dropoff_date">
         </div>
         <div class="form-group">
             <label>Lämningstid:</label><br>
@@ -152,7 +152,7 @@
         </div>
         <div class="form-group">
             <label>Hämtningsdatum:</label><br>
-            <input type="date" name="pickup_date">
+            <input type="date" name="pickup_date" id="pickup_date">
         </div>
         <div class="form-group">
             <label>Hämtningsdatum:</label><br>
@@ -167,13 +167,32 @@
             <textarea name="message" rows="5"></textarea>
         </div>
         <p>Vänligen kontakta oss för att bekräfta tillgänglighet och slutföra din bokning.</p>
-        <p>Ring oss på <a href="tel:(123)456-7890">(123) 456-7890</a> eller e-posta <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a>.</p>
+        <p>E-posta <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a>.</p>
     </div>
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
+
+        // Set minimum date for dropoff_date to tomorrow
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        const minDropoffDate = tomorrow.toISOString().split('T')[0];
+        document.getElementById('dropoff_date').setAttribute('min', minDropoffDate);
+
+        // Update pickup_date minimum based on dropoff_date
+        document.getElementById('dropoff_date').addEventListener('change', function() {
+            const dropoffDate = this.value;
+            document.getElementById('pickup_date').setAttribute('min', dropoffDate);
+            
+            // Reset pickup_date if it's earlier than the new dropoff_date
+            const pickupDateInput = document.getElementById('pickup_date');
+            if (pickupDateInput.value && pickupDateInput.value < dropoffDate) {
+                pickupDateInput.value = '';
+            }
+        });
     </script>
 </body>
 </html>
