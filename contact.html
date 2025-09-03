@@ -99,6 +99,18 @@
             padding: 10px;
             margin: 5px 0;
         }
+        .submit-button {
+            background-color: #657F6D;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .submit-button:hover {
+            background-color: #4a5c4f;
+        }
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
@@ -140,18 +152,21 @@
     <div class="content">
         <h2>Kontakta oss</h2>
         <p>Vi vill gärna höra från dig och dina husdjur! Kontakta oss med frågor eller funderingar.</p>
-        <div class="form-group">
-            <label>Namn:</label><br>
-            <input type="text" name="name">
-        </div>
-        <div class="form-group">
-            <label>E-post:</label><br>
-            <input type="email" name="email">
-        </div>
-        <div class="form-group">
-            <label>Meddelande:</label><br>
-            <textarea name="message" rows="5"></textarea>
-        </div>
+        <form action="submit-form.php" method="post">
+            <div class="form-group">
+                <label>Namn:</label><br>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>E-post:</label><br>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Meddelande:</label><br>
+                <textarea name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Skicka</button>
+        </form>
         <br><br>
         <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Logo"> Följ oss på Instagram</a></p>
         <p>E-post: <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a></p>
