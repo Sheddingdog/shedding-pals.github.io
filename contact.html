@@ -111,6 +111,9 @@
         .submit-button:hover {
             background-color: #4a5c4f;
         }
+        .form-group.honeypot {
+            display: none;
+        }
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
@@ -152,7 +155,11 @@
     <div class="content">
         <h2>Kontakta oss</h2>
         <p>Vi vill gärna höra från dig och dina husdjur! Kontakta oss med frågor eller funderingar.</p>
-        <form action="submit-form.php" method="post">
+        <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact">
+            <div class="form-group honeypot">
+                <label>Bot Field: <input name="bot-field"></label>
+            </div>
             <div class="form-group">
                 <label>Namn:</label><br>
                 <input type="text" name="name" required>
