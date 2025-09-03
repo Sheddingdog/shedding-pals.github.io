@@ -81,10 +81,10 @@
             margin: 10px 0;
         }
         .form-group input, .form-group textarea, .form-group select {
-            width: 80%;
-            max-width: 400px;
+            width: 400px; /* Set all input fields to the same width */
             padding: 10px;
             margin: 5px 0;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
         @media (max-width: 768px) {
             .hamburger {
@@ -105,6 +105,10 @@
             .nav-links a {
                 margin: 10px 0;
                 font-size: 20px;
+            }
+            .form-group input, .form-group textarea, .form-group select {
+                width: 100%; /* Full width on smaller screens */
+                max-width: 400px;
             }
         }
     </style>
@@ -169,7 +173,6 @@
         <p>Vi återkommer med en bekräftelse när vi har granskat din bokning.</p>
         <p>E-posta <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a>.</p>
         <p>Adress: Tröskaregatan 12, 58334, Linköping</p>
-
     </div>
     <script>
         function toggleMenu() {
