@@ -94,10 +94,25 @@
             margin: 10px 0;
         }
         .form-group input, .form-group textarea, .form-group select {
-            width: 400px; /* Set all input fields to the same width */
+            width: 400px;
             padding: 10px;
             margin: 5px 0;
-            box-sizing: border-box; /* Ensure padding doesn't affect width */
+            box-sizing: border-box;
+        }
+        .submit-button {
+            background-color: #657F6D;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .submit-button:hover {
+            background-color: #4a5c4f;
+        }
+        .form-group.honeypot {
+            display: none;
         }
         @media (max-width: 768px) {
             .hamburger {
@@ -120,7 +135,7 @@
                 font-size: 20px;
             }
             .form-group input, .form-group textarea, .form-group select {
-                width: 100%; /* Full width on smaller screens */
+                width: 100%;
                 max-width: 400px;
             }
         }
@@ -143,46 +158,53 @@
     <div class="site-name">Elins Hundmys</div>
     <div class="content">
         <h2>Boka en plats nu!</h2>
-        <div class="form-group">
-            <label>Namn:</label><br>
-            <input type="text" name="name">
-        </div>
-        <div class="form-group">
-            <label>Telefon:</label><br>
-            <input type="tel" name="phone">
-        </div>
-        <div class="form-group">
-            <label>E-post:</label><br>
-            <input type="email" name="email">
-        </div>
-        <div class="form-group">
-            <label>Lämningsdatum:</label><br>
-            <input type="date" name="dropoff_date" id="dropoff_date">
-        </div>
-        <div class="form-group">
-            <label>Lämningstid:</label><br>
-            <select name="dropoff_time">
-                <option value="">Vänligen välj en tid</option>
-                <option value="morning">Morgon</option>
-                <option value="evening">Kväll</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Hämtningsdatum:</label><br>
-            <input type="date" name="pickup_date" id="pickup_date">
-        </div>
-        <div class="form-group">
-            <label>Hämtningsdatum:</label><br>
-            <select name="pickup_time">
-                <option value="">Vänligen välj en tid</option>
-                <option value="morning">Morgon</option>
-                <option value="evening">Kväll</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Meddelande:</label><br>
-            <textarea name="message" rows="5"></textarea>
-        </div>
+        <form name="booking" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="booking">
+            <div class="form-group honeypot">
+                <label>Bot Field: <input name="bot-field"></label>
+            </div>
+            <div class="form-group">
+                <label>Namn:</label><br>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Telefon:</label><br>
+                <input type="tel" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>E-post:</label><br>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Lämningsdatum:</label><br>
+                <input type="date" name="dropoff_date" id="dropoff_date" required>
+            </div>
+            <div class="form-group">
+                <label>Lämningstid:</label><br>
+                <select name="dropoff_time" required>
+                    <option value="">Vänligen välj en tid</option>
+                    <option value="morning">Morgon</option>
+                    <option value="evening">Kväll</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Hämtningsdatum:</label><br>
+                <input type="date" name="pickup_date" id="pickup_date" required>
+            </div>
+            <div class="form-group">
+                <label>Hämtningsdatum:</label><br>
+                <select name="pickup_time" required>
+                    <option value="">Vänligen välj en tid</option>
+                    <option value="morning">Morgon</option>
+                    <option value="evening">Kväll</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Meddelande:</label><br>
+                <textarea name="message" rows="5"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Skicka bokning</button>
+        </form>
         <p>Vi återkommer med en bekräftelse när vi har granskat din bokning.</p>
         <br><br>
         <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Logo"> Följ oss på Instagram</a></p>
