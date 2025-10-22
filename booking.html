@@ -177,31 +177,31 @@
                 <input type="email" name="email" required>
             </div>
             <div class="form-group">
-                <label>Lämningsdatum:</label><br>
-                <input type="date" name="dropoff_date" id="dropoff_date" required>
+                <label>Lämningsdatum (valfritt):</label><br>
+                <input type="date" name="dropoff_date" id="dropoff_date">
             </div>
             <div class="form-group">
-                <label>Lämningstid:</label><br>
-                <select name="dropoff_time" required>
+                <label>Lämningstid (valfritt):</label><br>
+                <select name="dropoff_time">
                     <option value="">Vänligen välj en tid</option>
                     <option value="morning">Morgon</option>
                     <option value="evening">Kväll</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Hämtningsdatum:</label><br>
-                <input type="date" name="pickup_date" id="pickup_date" required>
+                <label>Hämtningsdatum (valfritt):</label><br>
+                <input type="date" name="pickup_date" id="pickup_date">
             </div>
             <div class="form-group">
-                <label>Hämtningsdatum:</label><br>
-                <select name="pickup_time" required>
+                <label>Hämtningsdatum (valfritt):</label><br>
+                <select name="pickup_time">
                     <option value="">Vänligen välj en tid</option>
                     <option value="morning">Morgon</option>
                     <option value="evening">Kväll</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Meddelande:</label><br>
+                <label>Meddelande (valfritt):</label><br>
                 <textarea name="message" rows="5"></textarea>
             </div>
             <button type="submit" class="submit-button">Skicka bokning</button>
@@ -217,22 +217,25 @@
             navLinks.classList.toggle('active');
         }
 
-        // Set minimum date for dropoff_date to tomorrow
+        // Set minimum date for dropoff_date to tomorrow (still applies even if optional)
         const today = new Date();
         const tomorrow = new Date(today);
         tomorrow.setDate(today.getDate() + 1);
         const minDropoffDate = tomorrow.toISOString().split('T')[0];
-        document.getElementById('dropoff_date').setAttribute('min', minDropoffDate);
+        const dropoffDateInput = document.getElementById('dropoff_date');
+        dropoffDateInput.setAttribute('min', minDropoffDate);
 
-        // Update pickup_date minimum based on dropoff_date
-        document.getElementById('dropoff_date').addEventListener('change', function() {
+        // Update pickup_date minimum based on dropoff_date (only if dates are filled)
+        dropoffDateInput.addEventListener('change', function() {
             const dropoffDate = this.value;
-            document.getElementById('pickup_date').setAttribute('min', dropoffDate);
-            
-            // Reset pickup_date if it's earlier than the new dropoff_date
-            const pickupDateInput = document.getElementById('pickup_date');
-            if (pickupDateInput.value && pickupDateInput.value < dropoffDate) {
-                pickupDateInput.value = '';
+            if (dropoffDate) {
+                document.getElementById('pickup_date').setAttribute('min', dropoffDate);
+                
+                // Reset pickup_date if it's earlier than the new dropoff_date
+                const pickupDateInput = document.getElementById('pickup_date');
+                if (pickupDateInput.value && pickupDateInput.value < dropoffDate) {
+                    pickupDateInput.value = '';
+                }
             }
         });
     </script>
