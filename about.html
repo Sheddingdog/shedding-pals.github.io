@@ -91,8 +91,8 @@
             vertical-align: middle;
         }
 
-        /* ---- UPDATED STYLES FOR ABOUT SECTION: 1 image below text, 2 images beside text ---- */
-        .about-section {
+        /* ---- NEW LAYOUT: Text → Image below text → 2 images beside (right) ---- */
+        .about-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -100,18 +100,36 @@
             gap: 30px;
             margin-top: 30px;
         }
-        .about-text {
+        .about-left {
             flex: 1 1 300px;
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .about-images {
+        .about-text {
+            text-align: left;
+            width: 100%;
+        }
+        .about-text-under {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .about-text-under img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        .about-images-right {
             flex: 1 1 300px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             align-items: center;
         }
-        .about-images img {
+        .about-images-right img {
             width: 100%;
             max-width: 350px;
             height: auto;
@@ -119,31 +137,20 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             object-fit: cover;
         }
-        .about-bottom-image {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .about-bottom-image img {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
+
         @media (max-width: 768px) {
-            .about-section {
+            .about-container {
                 flex-direction: column;
                 align-items: center;
             }
             .about-text {
                 text-align: center;
             }
-            .about-bottom-image {
-                margin-top: 20px;
+            .about-text-under {
+                margin-top: 15px;
             }
         }
-        /* ---------------------------------------------------------------------------------- */
+        /* --------------------------------------------------------------------- */
 
         @media (max-width: 768px) {
             .hamburger {
@@ -186,24 +193,27 @@
     <div class="content">
         <h2>Om oss</h2>
 
-        <!-- SECTION: Text + 2 images beside -->
-        <div class="about-section">
-            <div class="about-text">
-                <h3>Vår berättelse</h3>
-                <p>Vi är ett par (Elin och Chen) som älskar djur, som båda växte upp med hundar och katter, och vi har även många års erfarenhet av att ta hand om andras husdjur. Nu har vi beslutat att starta en egen liten verksamhet för att ta hand om andras djur. Mer om oss kommer snart.</p>
+        <!-- NEW LAYOUT: Text | (2 images right) -->
+        <!--               ↓ Image directly under text -->
+        <div class="about-container">
+            <!-- LEFT COLUMN: Text + image under text -->
+            <div class="about-left">
+                <div class="about-text">
+                    <h3>Vår berättelse</h3>
+                    <p>Vi är ett par (Elin och Chen) som älskar djur, som båda växte upp med hundar och katter, och vi har även många års erfarenhet av att ta hand om andras husdjur. Nu har vi beslutat att starta en egen liten verksamhet för att ta hand om andras djur. Mer om oss kommer snart.</p>
+                </div>
+
+                <!-- ONE IMAGE DIRECTLY BELOW THE TEXT -->
+                <div class="about-text-under">
+                    <img src="image_about/photo1.jpg" alt="Vår hundmiljö">
+                </div>
             </div>
 
-            <div class="about-images">
-                <!-- Replace filenames with actual images in image_about/ -->
+            <!-- RIGHT COLUMN: Two images stacked -->
+            <div class="about-images-right">
                 <img src="image_about/photo2.jpg" alt="Elin med hund">
                 <img src="image_about/photo3.jpg" alt="Chen med hund">
             </div>
-        </div>
-        <!-- END SECTION -->
-
-        <!-- ONE IMAGE BELOW THE ENTIRE SECTION -->
-        <div class="about-bottom-image">
-            <img src="image_about/photo1.jpg" alt="Vår hundmiljö">
         </div>
 
         <br><br>
