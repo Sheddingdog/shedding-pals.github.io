@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galleri</title>
+    <title>Tjänster & Pris</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,19 +62,6 @@
             color: #657F6D;
             text-decoration: none;
         }
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #657F6D;
-            margin-bottom: 10px;
-        }
-        .social-link img {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
         .content {
             padding: 20px;
             text-align: center;
@@ -90,28 +77,63 @@
             color: #657F6D;
             text-decoration: none;
         }
-
-        /* ---------- GALLERY ---------- */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            justify-items: center;          /* centre each image in its cell */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #657F6D;
+            margin-bottom: 10px;
         }
-        .gallery img {
-            max-width: 100%;                /* never larger than its cell */
-            height: auto;                   /* keep original aspect ratio */
+        .social-link img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .pricing-table {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
             border-radius: 8px;
-            cursor: pointer;
-            display: block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .gallery img:hover {
-            opacity: 0.8;
+        .pricing-table h3 {
+            color: #657F6D;
+            margin-bottom: 15px;
         }
-
+        .pricing-item {
+            margin: 15px 0;
+            padding: 10px;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .pricing-item:last-child {
+            border-bottom: none;
+        }
+        .pricing-item img {
+            width: 200px;
+            height: 200px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .pricing-item span {
+            font-weight: bold;
+            color: #657F6D;
+            font-size: 20px;
+        }
+        .pricing-item-text {
+            flex: 1;
+        }
+        .pricing-item-text p {
+            font-size: 18px;
+        }
         @media (max-width: 768px) {
-            .hamburger { display: block; }
+            .hamburger {
+                display: block;
+            }
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -121,9 +143,13 @@
                 top: 60px;
                 left: 0;
             }
-            .nav-links.active { display: flex; }
-            .nav-links a { margin: 10px 0; font-size: 20px; }
-            .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -136,63 +162,51 @@
             <a href="services.html">Tjänster & Pris</a>
             <a href="gallery.html">Galleri</a>
             <a href="contact.html">Kontakta oss</a>
-            <a href="booking.html">Boka en plats nu!</a>
+            <!-- Removed: Boka en plats nu! -->
         </div>
     </div>
-
     <div class="back-link"><a href="index.html">Tillbaka</a></div>
     <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
     <div class="site-name">Elins Hundmys</div>
-
     <div class="content">
-        <h2>Galleri</h2>
-        <h3>Husdjursögonblick</h3>
-        <p>Utforska bilder av våra fyrbenta vänner som njuter av sin tid hos oss. Mer kommer snart!</p>
-
-        <div class="gallery" id="gallery"></div>
-
+        <h2>Tjänster & Pris</h2>
+        <p>Vi erbjuder hunddagis och övernattning för ditt husdjur med flexibla och prisvärda alternativ. Utöver detta kan vi vid särskilda tillfällen erbjuda hämtning och hemleverans vid behov, till en extra kostnad.</p>
+        <p>Avbokning minst en vecka i förväg är kostnadsfri. Vid avbokning 7–3 dagar i förväg debiterar vi 1/3 av kostnaden för en dag. De sista 2 dagarna debiterar vi 1/2 av kostnaden för en dag.</p>
+        <div class="pricing-table">
+            <h3>Priser för hunddagis och övernattning</h3>
+            <div class="pricing-item">
+                <img src="daycare.png" alt="Hunddagis">
+                <div class="pricing-item-text">
+                    <p>Hunddagis: <span>235 kr/dag</span></p>
+                    <p>Gäller även helger och helgdagar.</p>
+                </div>
+            </div>
+            <div class="pricing-item">
+                <img src="overnight.png" alt="Övernattning">
+                <div class="pricing-item-text">
+                    <p>Övernattning: <span>295 kr/natt</span></p>
+                    <p>Gäller även helger och helgdagar.</p>
+                </div>
+            </div>
+            <div class="pricing-item">
+                <img src="monthly_daycare.png" alt="Månadserbjudande">
+                <div class="pricing-item-text">
+                    <p>Månadserbjudande (hunddagis): <span>3150 kr/månad</span></p>
+                    <p>Inkluderar vardagar, helger och helgdagar.</p>
+                    <p style="color: red;">Vi erbjuder för närvarande inte detta val.</p>
+                </div>
+            </div>
+        </div>
         <br><br>
-        <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Logo"> Följ oss på Instagram</a></p>
+        <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Logo"> Följ oss på Instagram</a></p>
         <p>E-post: <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a></p>
         <p>Adress: Tröskaregatan 12, 58334, Linköping</p>
     </div>
-
     <script>
-        // Hamburger menu
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
-
-        // ---------- GALLERY LOGIC ----------
-        const gallery = document.getElementById('gallery');
-
-        // Add / remove paths here – every new file in /images/ just needs to be listed.
-        const galleryImages = [
-            'images/Spice 1.jpg',
-            'images/Ejmi 1.png'
-            // 'images/pet3.jpg',
-            // 'images/newpet.jpg'
-        ];
-
-        // Shuffle array (random order on each page load)
-        galleryImages.sort(() => Math.random() - 0.5);
-
-        // Append shuffled images
-        galleryImages.forEach(src => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = src.split('/').pop().replace(/\..+$/, '');
-            gallery.appendChild(img);
-        });
-
-        // Click to open full-size image in a new tab
-        gallery.addEventListener('click', e => {
-            if (e.target.tagName === 'IMG') {
-                window.open(e.target.src, '_blank');
-            }
-        });
     </script>
 </body>
 </html>
