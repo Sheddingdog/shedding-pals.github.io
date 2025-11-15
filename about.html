@@ -91,7 +91,7 @@
             vertical-align: middle;
         }
 
-        /* ---- NEW STYLES FOR ABOUT SECTION WITH IMAGES ---- */
+        /* ---- UPDATED STYLES FOR ABOUT SECTION: 1 image below text, 2 images beside text ---- */
         .about-section {
             display: flex;
             flex-wrap: wrap;
@@ -119,6 +119,18 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             object-fit: cover;
         }
+        .about-bottom-image {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .about-bottom-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
         @media (max-width: 768px) {
             .about-section {
                 flex-direction: column;
@@ -127,8 +139,11 @@
             .about-text {
                 text-align: center;
             }
+            .about-bottom-image {
+                margin-top: 20px;
+            }
         }
-        /* -------------------------------------------------- */
+        /* ---------------------------------------------------------------------------------- */
 
         @media (max-width: 768px) {
             .hamburger {
@@ -155,14 +170,13 @@
 </head>
 <body>
     <div class="header">
-        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <button class="hamburger" onclick="toggleMenu()">Menu</button>
         <div class="nav-links" id="navLinks">
             <a href="index.html">Hem</a>
             <a href="about.html">Om oss</a>
             <a href="services.html">Tjänster & Pris</a>
             <a href="gallery.html">Galleri</a>
             <a href="contact.html">Kontakta oss</a>
-            <!-- Removed: Boka en plats nu! -->
         </div>
     </div>
     <div class="back-link"><a href="index.html">Tillbaka</a></div>
@@ -172,7 +186,7 @@
     <div class="content">
         <h2>Om oss</h2>
 
-        <!-- NEW SECTION WITH TEXT + TWO IMAGES -->
+        <!-- SECTION: Text + 2 images beside -->
         <div class="about-section">
             <div class="about-text">
                 <h3>Vår berättelse</h3>
@@ -180,12 +194,17 @@
             </div>
 
             <div class="about-images">
-                <!-- Replace the filenames with the actual image names in your "image_about" folder -->
-                <img src="image_about/photo1.jpg" alt="Elin och Chen med hund">
-                <img src="image_about/photo2.jpg" alt="Vår hundmiljö">
+                <!-- Replace filenames with actual images in image_about/ -->
+                <img src="image_about/photo2.jpg" alt="Elin med hund">
+                <img src="image_about/photo3.jpg" alt="Chen med hund">
             </div>
         </div>
-        <!-- END NEW SECTION -->
+        <!-- END SECTION -->
+
+        <!-- ONE IMAGE BELOW THE ENTIRE SECTION -->
+        <div class="about-bottom-image">
+            <img src="image_about/photo1.jpg" alt="Vår hundmiljö">
+        </div>
 
         <br><br>
         <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Logo"> Följ oss på Instagram</a></p>
