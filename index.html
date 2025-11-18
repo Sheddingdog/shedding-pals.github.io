@@ -3,7 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elins Hundmys</title>
+    <title>Elins Hundmys – Hunddagis & Hundpensionat i Linköping</title>
+
+    <!-- ====== FAVICONS (helps Google recognize your brand) ====== -->
+    <link rel="icon" href="https://www.elinshundmys.se/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://www.elinshundmys.se/logo.png">
+
+    <!-- ====== GOOGLE / SEARCH ENGINES – THIS IS THE MOST IMPORTANT PART ====== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Elins Hundmys",
+      "url": "https://www.elinshundmys.se",
+      "logo": "https://www.elinshundmys.se/logo.png",
+      "description": "Hunddagis och hundpensionat i hemmiljö i Lambohov, Linköping. Personlig omsorg för 2–4 hundar åt gången.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Tröskaregatan 12",
+        "postalCode": "583 34",
+        "addressLocality": "Linköping",
+        "addressCountry": "SE"
+      },
+      "email": "info@elinshundmys.se",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@elinshundmys.se",
+        "contactType": "Kundtjänst"
+      }
+    }
+    </script>
+
+    <!-- ====== OPEN GRAPH (Facebook, LinkedIn, WhatsApp, etc.) ====== -->
+    <meta property="og:title" content="Elins Hundmys – Hunddagis & Hundpensionat i Linköping">
+    <meta property="og:description" content="Mysigt hunddagis i hemmet i Lambohov. Personlig omsorg, promenader och kel – bara 2–4 hundar åt gången.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.elinshundmys.se">
+    <meta property="og:image" content="https://www.elinshundmys.se/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+
+    <!-- ====== TWITTER CARD ====== -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Elins Hundmys – Hunddagis i Linköping">
+    <meta name="twitter:description" content="Hunddagis och pensionat i hemmiljö med personlig omsorg.">
+    <meta name="twitter:image" content="https://www.elinshundmys.se/logo.png">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,7 +82,7 @@
             cursor: pointer;
             position: absolute;
             top: 50%;
-            right: 20 Tiles;
+            right: 20px;            /* ← fixed typo */
             transform: translateY(-50%);
         }
         .site-name {
@@ -53,15 +98,6 @@
             margin: 20px auto 0 auto;
             width: 200px;
         }
-        .back-link {
-            position: absolute;
-            top: 80px;
-            left: 20px;
-        }
-        .back-link a {
-            color: #657F6D;
-            text-decoration: none;
-        }
         .content {
             padding: 20px;
             text-align: center;
@@ -70,12 +106,8 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .content h2 {
+        .content h2, .content h3 {
             color: #657F6D;
-        }
-        .content a {
-            color: #657F6D;
-            text-decoration: none;
         }
         .book-now-button {
             display: inline-block;
@@ -87,11 +119,9 @@
             font-size: 18px;
             margin: 10px 0;
             transition: background-color 0.3s;
-            text-align: center;
         }
         .book-now-button:hover {
             background-color: #4a5b4e;
-            color: white !important;
         }
         .social-link {
             display: inline-flex;
@@ -107,9 +137,7 @@
             vertical-align: middle;
         }
         @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
+            .hamburger { display: block; }
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -119,44 +147,47 @@
                 top: 60px;
                 left: 0;
             }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links a {
-                margin: 10px 0;
-                font-size: 20px;
-            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 10px 0; font-size: 20px; }
         }
     </style>
 </head>
 <body>
+
     <div class="header">
-        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
         <div class="nav-links" id="navLinks">
             <a href="index.html">Hem</a>
             <a href="about.html">Om oss</a>
             <a href="services.html">Tjänster & Pris</a>
             <a href="gallery.html">Galleri</a>
             <a href="contact.html">Kontakta oss</a>
-            <!-- Removed: Boka en plats nu! from navigation -->
         </div>
     </div>
-    <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+
+    <a href="index.html"><img src="logo.png" alt="Elins Hundmys Logo" class="logo"></a>
     <div class="site-name">Elins Hundmys</div>
+
     <div class="content">
         <h2>Välkommen till vår husdjursvänliga värld</h2>
         <p>Välkommen till Elins Hundmys, ett litet och mysigt hunddagis i hemmet i Lambohov, Linköping. Vi erbjuder dagis (debiteras per dag eller enligt överenskommelse) och övernattning (debiteras per natt). Som nyöppnat företag har vi schyssta priser – boka plats redan idag!</p>
+        
         <a href="contact.html" class="book-now-button">Boka en plats nu!</a>
+
         <p>För dagis promenerar vi hunden en gång på morgonen och en gång efter lunch. Är det längre vistelse än bara dagis går vi fler promenader, förutom på morgonen eller kvällen när du lämnar eller hämtar. Hos oss får hunden vara i en lugn och mysig miljö, precis som namnet Hundmys säger. Hundarna bor i ett rum med vanliga möbler istället för burar, och det finns alltid någon människa här som ger trygghet och närhet. Vi tar emot 2–4 hundar åt gången, beroende på hur det passar.</p>
+
         <h3>Vårt uppdrag</h3>
         <p>Vårt uppdrag är att erbjuda en säker, rolig och omhändertagande miljö för dina hundar när du är borta. Med personlig vård i en mysig hemmiljö ser vi till att din hund känner sig som hemma, med massor av lek, kel och uppmärksamhet.</p>
         <br><br>
-        <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram Logo"> Följ oss på Instagram</a></p>
+
+        <p><a href="https://www.instagram.com/elinshundmys/" class="social-link" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"> Följ oss på Instagram</a></p>
         <p>E-post: <a href="mailto:info@elinshundmys.se">info@elinshundmys.se</a></p>
-        <p>Adress: Tröskaregatan 12, 58334, Linköping</p>      
+        <p>Adress: Tröskaregatan 12, 583 34, Linköping</p>      
         <br><br>
         <p><i>Denna webbplats är under utveckling</i></p>
     </div>
+
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
