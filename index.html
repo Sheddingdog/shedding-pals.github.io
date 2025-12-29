@@ -82,7 +82,7 @@
             cursor: pointer;
             position: absolute;
             top: 50%;
-            right: 20px;            /* ← fixed typo */
+            right: 20px;
             transform: translateY(-50%);
         }
         .site-name {
@@ -97,6 +97,14 @@
             display: block;
             margin: 20px auto 0 auto;
             width: 200px;
+        }
+        .status-message {
+            text-align: center;
+            margin: 10px 0 30px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #c0392b; /* Röd för att dra uppmärksamhet */
+            padding: 0 20px;
         }
         .content {
             padding: 20px;
@@ -149,6 +157,9 @@
             }
             .nav-links.active { display: flex; }
             .nav-links a { margin: 10px 0; font-size: 20px; }
+            .status-message {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -167,6 +178,9 @@
 
     <a href="index.html"><img src="logo.png" alt="Elins Hundmys Logo" class="logo"></a>
     <div class="site-name">Elins Hundmys</div>
+    
+    <!-- Ny rad med statusmeddelande -->
+    <div class="status-message">Vi har för närvarande pausat verksamheten</div>
 
     <div class="content">
         <h2>Välkommen till vår husdjursvänliga värld</h2>
